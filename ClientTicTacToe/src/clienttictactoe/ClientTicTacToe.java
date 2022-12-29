@@ -14,7 +14,7 @@ public class ClientTicTacToe extends Application {
 // Password is "root"
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         
         Scene scene = new Scene(root);
         
