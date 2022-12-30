@@ -255,7 +255,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge.setMnemonicParsing(false);
         buttonChallenge.setPrefHeight(40.0);
-        buttonChallenge.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge.setText("Challenge");
         buttonChallenge.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         FlowPane.setMargin(buttonChallenge, new Insets(0.0, 0.0, 15.0, 0.0));
@@ -263,7 +263,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge1.setMnemonicParsing(false);
         buttonChallenge1.setPrefHeight(40.0);
-        buttonChallenge1.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge1.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge1.setText("Challenge");
         buttonChallenge1.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge1.setFont(new Font("System Bold", 14.0));
@@ -271,7 +271,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge2.setMnemonicParsing(false);
         buttonChallenge2.setPrefHeight(40.0);
-        buttonChallenge2.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge2.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge2.setText("Challenge");
         buttonChallenge2.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge2.setFont(new Font("System Bold", 14.0));
@@ -279,7 +279,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge3.setMnemonicParsing(false);
         buttonChallenge3.setPrefHeight(40.0);
-        buttonChallenge3.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge3.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge3.setText("Challenge");
         buttonChallenge3.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge3.setFont(new Font("System Bold", 14.0));
@@ -287,7 +287,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge4.setMnemonicParsing(false);
         buttonChallenge4.setPrefHeight(40.0);
-        buttonChallenge4.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge4.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge4.setText("Challenge");
         buttonChallenge4.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge4.setFont(new Font("System Bold", 14.0));
@@ -295,7 +295,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge5.setMnemonicParsing(false);
         buttonChallenge5.setPrefHeight(40.0);
-        buttonChallenge5.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge5.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge5.setText("Challenge");
         buttonChallenge5.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge5.setFont(new Font("System Bold", 14.0));
@@ -303,7 +303,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge6.setMnemonicParsing(false);
         buttonChallenge6.setPrefHeight(40.0);
-        buttonChallenge6.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge6.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge6.setText("Challenge");
         buttonChallenge6.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge6.setFont(new Font("System Bold", 14.0));
@@ -311,7 +311,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         buttonChallenge7.setMnemonicParsing(false);
         buttonChallenge7.setPrefHeight(40.0);
-        buttonChallenge7.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 0;");
+        buttonChallenge7.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 7;");
         buttonChallenge7.setText("Challenge");
         buttonChallenge7.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonChallenge7.setFont(new Font("System Bold", 14.0));

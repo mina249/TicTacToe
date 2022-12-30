@@ -179,7 +179,7 @@
             </FlowPane>
             <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Button fx:id="buttonChallenge" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <FlowPane.margin>
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
@@ -187,7 +187,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonChallenge1" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge1" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -195,7 +195,7 @@
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="buttonChallenge2" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge2" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -203,7 +203,7 @@
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="buttonChallenge3" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge3" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -211,7 +211,7 @@
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="buttonChallenge4" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge4" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -219,7 +219,7 @@
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="buttonChallenge5" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge5" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -227,7 +227,7 @@
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="buttonChallenge6" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge6" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -235,7 +235,7 @@
                         <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="buttonChallenge7" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 0;" text="Challenge" textFill="#d9d9d9">
+                  <Button fx:id="buttonChallenge7" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #FF4948; -fx-background-radius: 7;" text="Challenge" textFill="#d9d9d9">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
