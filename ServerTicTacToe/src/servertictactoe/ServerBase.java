@@ -26,8 +26,8 @@ public abstract class ServerBase extends GridPane {
         setMaxWidth(USE_PREF_SIZE);
         setMinHeight(USE_PREF_SIZE);
         setMinWidth(USE_PREF_SIZE);
-        setPrefHeight(600.0);
-        setPrefWidth(1200.0);
+        setPrefHeight(720.0);
+        setPrefWidth(1080.0);
 
         columnConstraints.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints.setMinWidth(10.0);
