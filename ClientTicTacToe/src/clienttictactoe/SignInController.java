@@ -53,7 +53,7 @@ public class SignInController implements Initializable {
         stage.show();
     }
     public void handleBackButtonAction(ActionEvent event) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("HomePageScreen.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
          stage.setScene(scene);
