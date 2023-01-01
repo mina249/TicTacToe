@@ -109,7 +109,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
 
         columnConstraints1.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints1.setMinWidth(0.0);
-        columnConstraints1.setPercentWidth(70.0);
+        columnConstraints1.setPercentWidth(60.0);
         columnConstraints1.setPrefWidth(100.0);
 
         columnConstraints2.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
@@ -121,10 +121,11 @@ public abstract class OnlinePlayerListBase extends GridPane {
         rowConstraints1.setVgrow(javafx.scene.layout.Priority.SOMETIMES);
 
         buttonBack.setMnemonicParsing(false);
+        buttonBack.setOnAction(this::handleLogoutButtonAction);
         buttonBack.setPrefHeight(55.0);
-        buttonBack.setPrefWidth(51.0);
-        buttonBack.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 30;");
-        buttonBack.setText("<");
+        buttonBack.setPrefWidth(100.0);
+        buttonBack.setStyle("-fx-background-color: #FF4948; -fx-background-radius: 5;");
+        buttonBack.setText("Logout");
         buttonBack.setTextFill(javafx.scene.paint.Color.valueOf("#d9d9d9"));
         buttonBack.setFont(new Font("System Bold", 20.0));
         GridPane.setMargin(buttonBack, new Insets(0.0, 0.0, 0.0, 10.0));
@@ -354,4 +355,7 @@ public abstract class OnlinePlayerListBase extends GridPane {
         getChildren().add(gridPane0);
 
     }
+
+    protected abstract void handleLogoutButtonAction(javafx.event.ActionEvent actionEvent);
+
 }
