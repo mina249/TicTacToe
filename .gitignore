@@ -30,3 +30,9 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+ClientTicTacToe/build/built-jar.properties
+ClientTicTacToe/dist/ClientTicTacToe.html
+ClientTicTacToe/dist/ClientTicTacToe.jar
+ClientTicTacToe/dist/ClientTicTacToe.jnlp
+ClientTicTacToe/dist/web-files/dtjava.js
+ClientTicTacToe/nbproject/private/private.xml
