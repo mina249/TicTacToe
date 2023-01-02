@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -43,11 +44,15 @@ public class SignUpController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }  
-     /*public void handleSignupButtonAction(ActionEvent event) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+    @FXML
+    public void handleSignupButtonAction(ActionEvent event) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("OnlinePlayerList.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-    }*/
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
      public void handlBackButtonAction(ActionEvent event) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Scene scene = new Scene(root);
@@ -55,5 +60,5 @@ public class SignUpController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+   
 }

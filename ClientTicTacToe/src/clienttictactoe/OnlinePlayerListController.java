@@ -71,6 +71,11 @@ public class OnlinePlayerListController implements Initializable {
     }
     
         public void handleChallengeButtonAction(ActionEvent event) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+        stage.show();   
  
     }
     @Override
