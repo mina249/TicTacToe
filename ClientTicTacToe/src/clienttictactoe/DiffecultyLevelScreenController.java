@@ -49,14 +49,41 @@ public class DiffecultyLevelScreenController implements Initializable {
 
     @FXML
     private void handleEasyBtnAction(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(HomePageScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void handleMediumBtnAction(ActionEvent event) {
+           try {
+            Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(HomePageScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void handleHardBtnAction(ActionEvent event) {
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(HomePageScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

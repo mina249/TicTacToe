@@ -18,14 +18,14 @@
                   <Image url="@signin-img.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_Back" layoutX="39.0" layoutY="25.0" onAction="#handlBackButtonAction" prefHeight="51.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #ff4948;" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btn_Back" layoutX="30.0" layoutY="30.0" onAction="#handlBackButtonAction" prefHeight="51.0" prefWidth="55.0" style="-fx-background-radius: 30; -fx-background-color: #ff4948;" text="&lt;" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="720.0" prefWidth="620.0" style="-fx-background-color: #1F3171;">
+      <AnchorPane onDragDetected="#handlBackButtonAction" prefHeight="720.0" prefWidth="620.0" style="-fx-background-color: #1F3171;">
          <children>
             <Label layoutX="174.0" layoutY="55.0" text="SignUp" textFill="#ff4948">
                <font>
@@ -50,7 +50,7 @@
             <TextField fx:id="tf_UserNmae" layoutX="54.0" layoutY="211.0" prefHeight="41.0" prefWidth="412.0" />
             <TextField fx:id="tf_Email" layoutX="54.0" layoutY="301.0" prefHeight="41.0" prefWidth="412.0" />
             <TextField fx:id="tf_Password" layoutX="54.0" layoutY="391.0" prefHeight="41.0" prefWidth="412.0" />
-            <Button fx:id="btn_SiginUp" layoutX="177.0" layoutY="472.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="167.0" style="-fx-background-color: #ff4948;" text="SignUp" textFill="WHITE">
+            <Button fx:id="btn_SiginUp" layoutX="177.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleSignupButtonAction" prefHeight="51.0" prefWidth="167.0" style="-fx-background-color: #ff4948;" text="SignUp" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
