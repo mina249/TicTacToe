@@ -58,7 +58,15 @@ public class HomePageScreenController implements Initializable {
     }
 
     @FXML
-    private void handleTwoPlayersBtnAction(ActionEvent event) {
+    private void handleTwoPlayersBtnAction(ActionEvent event) throws IOException {
+        
+     
+        Parent root = FXMLLoader.load(getClass().getResource("ChosingPlayersNames.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+     
        
     }
 
@@ -76,7 +84,14 @@ public class HomePageScreenController implements Initializable {
     }
 
     @FXML
-    private void handleGameRecordBtnAction(ActionEvent event) {
+    private void handleGameRecordBtnAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("GameRecords.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
+  
+ }
     
-}
+
