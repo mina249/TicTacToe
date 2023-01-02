@@ -7,8 +7,6 @@ package clienttictactoe;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +24,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author lenovo
+ * @author Nada
  */
 public class BoardScrController implements Initializable {
 
@@ -55,20 +53,20 @@ public class BoardScrController implements Initializable {
     @FXML
     private Button playAgain;
     @FXML
-    private Button boardBckBtn;
+    private Button back_btn_board_sc;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-   
+        // TODO
     }    
 
     @FXML
-    private void handleBoardBackBtn(ActionEvent event) {
+    private void handleBackButtonAction(ActionEvent event) {
           try {
-            Parent root = FXMLLoader.load(getClass().getResource("DiffecultyLevelScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("HomePageScreen.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -77,5 +75,5 @@ public class BoardScrController implements Initializable {
             Logger.getLogger(HomePageScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    }
     
-}
