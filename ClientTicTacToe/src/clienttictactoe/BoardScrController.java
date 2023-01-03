@@ -66,6 +66,9 @@ public class BoardScrController implements Initializable {
     private int secondPlayerScore = 0;
     private String winnerName;
     private String gameStatus;
+    private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
+    private String ai = "X";
+    private String user = "O";
 
     /**
      * Initializes the controller class.
@@ -281,4 +284,109 @@ public class BoardScrController implements Initializable {
          highlightTheLabel('o');
     }
     
-} 
+    
+    
+    
+    
+   
+    public boolean notifiyWining(){
+        
+        if(isAnyColumnNotifyWinningSomeone()==true || isAnyDiagonalNotifyWinningSomeone()==true || isAnyRowNotifyWinningSomeone()==true)
+            return true;
+        
+        return false;
+    }
+    public int evaluateBoard(Button[]board){
+    
+        if(isAnyColumnNotifyWinningSomeone()==true){
+            
+            if(board[0].getText().equals(ai) || board[1].getText().equals(ai)|| board[2].getText().equals(ai)){
+                return 10;
+            }else{
+                return -10;
+            }
+        }
+        if(isAnyRowNotifyWinningSomeone()==true){
+            if(board[0].getText().equals(ai) ||board[3].getText().equals(ai)|| board[6].getText().equals(ai)){
+                return 10;
+            }else{
+                return -10;
+            }
+        }
+        if(isAnyDiagonalNotifyWinningSomeone()==true){
+            if(board[0].getText().equals(ai) || board[2].getText().equals(ai)){
+                return 10;
+            }else{
+                return -10;
+            }
+        }
+        return 0;
+    }
+    
+    
+    public int minMax(Button[]board , int depth , boolean isAi){
+    
+        int score = evaluateBoard(board);
+        if(score == 10 || score == -10 || score == 0){
+            return score;
+        }
+        if(isBoardFull()==true){
+            return 0;
+        }
+        
+        if(isAi){
+            int bestScore = Integer.MIN_VALUE;
+            for(int i =0 ; i <9 ;i++){
+                if(board[i].getText().equals("")){
+                   board[i].setText(ai);
+                   bestScore = Math.max(bestScore, minMax(board, depth+1,false));
+                   board[i].setText("");
+                
+                }
+            
+            
+            }
+        return bestScore - depth;
+        }else{
+            int bestScore = Integer.MAX_VALUE;
+             for(int i =0 ; i <9 ;i++){
+                if(board[i].getText().equals("")){
+                   board[i].setText(user);
+                   bestScore = Math.max(bestScore, minMax(board, depth+1,true));
+                   board[i].setText("");
+                
+                }
+            }
+        return bestScore + depth;
+        
+        }
+    }
+    public Button findBestPlay(Button [] Board){
+        Button bestButton = new Button();
+        int bestScore = Integer.MIN_VALUE;
+        for(int i = 0 ; i<9 ; i++){
+        
+            if(board[i].getText().equals("")){
+                board[i].setText(ai);
+                
+                int score = minMax(board , 0 , false);
+                board[i].setText("");
+                if(score>bestScore){
+                    bestButton = board[i];
+                    bestScore = score;
+                }
+            }     
+        }
+        return bestButton;
+    }
+    
+    
+ }
+    
+    
+    
+    
+    
+    
+
+    
