@@ -76,13 +76,13 @@ public class BoardScrController implements Initializable {
         intializeGameType("");
         switch (currentGameType) {
             case SINGLEPLAYER:
-
+                
                 break;
             case TWOPLAYERSLOCAL:
-
+                
                 break;
             case ONLINEPLAY:
-
+                
                 break;
             default:
                 break;
@@ -319,7 +319,7 @@ public class BoardScrController implements Initializable {
 
     public void intializeGameType(String type) {
         switch (type) {
-            case "SinglePlayer":
+            case "SINGLEPLAYER":
                 currentGameType = GameType.SINGLEPLAYER;
                 break;
             case "TWOPLAYERSLOCAL":
