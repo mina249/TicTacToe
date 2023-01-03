@@ -75,52 +75,52 @@
             <Font name="Bookman Old Style" size="35.0" />
          </font>
       </Label>
-      <Button fx:id="box1" layoutX="284.0" layoutY="165.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box1" layoutX="284.0" layoutY="165.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="124.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box9" layoutX="601.0" layoutY="472.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box9" layoutX="601.0" layoutY="472.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="140.0" prefWidth="130.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box8" layoutX="434.0" layoutY="474.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box8" layoutX="434.0" layoutY="474.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="140.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box7" layoutX="281.0" layoutY="474.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box7" layoutX="281.0" layoutY="474.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="140.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box6" layoutX="607.0" layoutY="310.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box6" layoutX="600.0" layoutY="310.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="142.0" prefWidth="130.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box5" layoutX="432.0" layoutY="310.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box5" layoutX="432.0" layoutY="310.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="142.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box4" layoutX="281.0" layoutY="310.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box4" layoutX="281.0" layoutY="310.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="142.0" prefWidth="132.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box3" layoutX="607.0" layoutY="165.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="124.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box3" layoutX="602.0" layoutY="166.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="124.0" prefWidth="128.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="box2" layoutX="434.0" layoutY="165.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
+      <Button fx:id="box2" layoutX="434.0" layoutY="165.0" mnemonicParsing="false" onAction="#notifyPressing" prefHeight="124.0" prefWidth="150.0" style="-fx-background-color: #1F3274;" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="playAgain" layoutX="913.0" layoutY="644.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="144.0" style="-fx-background-color: #febd08;" text="Play Again" textFill="#282727">
+      <Button fx:id="playAgain" layoutX="913.0" layoutY="644.0" mnemonicParsing="false" onAction="#handlePlayAgainBtn" prefHeight="55.0" prefWidth="144.0" style="-fx-background-color: #febd08;" text="Play Again" textFill="#282727">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
