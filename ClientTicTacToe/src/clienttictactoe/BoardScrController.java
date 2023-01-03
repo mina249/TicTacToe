@@ -78,12 +78,45 @@ public class BoardScrController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentstatus = GameStatus.PLAYING;
+        currentGameType = GameType.TWOPLAYERSLOCAL; // Will remove when Farida finishes communication between pages
         highlightTheLabel('o');
-        if (currentGameType == GameType.TWOPLAYERSLOCAL) {
-            ;
+        intializeGameType("");
+        switch (currentGameType) {
+            case SINGLEPLAYER:
+
+                break;
+            case TWOPLAYERSLOCAL:
+
+                break;
+            case ONLINEPLAY:
+
+                break;
+            default:
+                break;
         }
     }
 
+    @FXML
+    private void notifyPressing(ActionEvent event) {
+        switch (currentGameType) {
+            case SINGLEPLAYER:
+                // handleThePressedBtnTwoPlayersMood(event);
+                break;
+            case TWOPLAYERSLOCAL:
+                handleThePressedBtnTwoPlayersMood(event);
+                break;
+            case ONLINEPLAY:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @FXML
+    private void handlePlayAgainBtn(ActionEvent event) {
+        setStandrdStart();
+    }
+    
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException {
         currentstatus = GameStatus.TERMINATED;
@@ -92,16 +125,6 @@ public class BoardScrController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    private void notifyPressing(ActionEvent event) {
-        handleThePressedBtnTwoPlayersMood(event);
-    }
-
-    @FXML
-    private void handlePlayAgainBtn(ActionEvent event) {
-        setStandrdStart();
     }
 
     public void handleThePressedBtnTwoPlayersMood(ActionEvent e) {
@@ -301,4 +324,19 @@ public class BoardScrController implements Initializable {
         highlightTheLabel('o');
     }
 
+    public void intializeGameType(String type) {
+        switch (type) {
+            case "SinglePlayer":
+                currentGameType = GameType.SINGLEPLAYER;
+                break;
+            case "TWOPLAYERSLOCAL":
+                currentGameType = GameType.TWOPLAYERSLOCAL;
+                break;
+            case "ONLINEPLAY":
+                currentGameType = GameType.ONLINEPLAY;
+                break;
+            default:
+                break;
+        }
+    }
 }
