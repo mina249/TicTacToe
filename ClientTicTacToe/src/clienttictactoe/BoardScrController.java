@@ -2,6 +2,7 @@ package clienttictactoe;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,7 @@ public class BoardScrController implements Initializable {
     private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
     private String ai = "X";
     private String user = "O";
+    private boolean isEasy = false;
 
 
     private enum GameStatus {
@@ -419,6 +421,36 @@ public class BoardScrController implements Initializable {
         }
         return bestButton;
     } 
+    
+    
+    public Button easyMode(){
+    int index;
+    Random random = new Random();
+    Button randomButton = new Button();
+    while(true){
+        index = random.nextInt(9);
+        if(board[index].getText().equals("")){
+            randomButton = board[index];
+            break;
+        }
+    }
+    return randomButton;
+    }
+    public Button mediumMode(){
+    
+        if(isEasy == false){
+        isEasy = true;
+        return hardMode();
+        }else{
+            isEasy = false;
+            return easyMode();
+        
+        }
+    
+    }
+    public Button hardMode(){
+        return findBestPlay(board);
+    }
     
 
     public void intializeGameType(String type) {
