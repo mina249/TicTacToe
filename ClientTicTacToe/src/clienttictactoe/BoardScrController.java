@@ -1,9 +1,12 @@
 package clienttictactoe;
 
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,6 +57,7 @@ public class BoardScrController implements Initializable {
     private Button targetedBtn;
     private int firstPlayerScore = 0;
     private int secondPlayerScore = 0;
+    private int numberOfClickedBoxes = 0;
     private String winnerName;
     private String gameStatus;
     private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
@@ -143,6 +147,7 @@ public class BoardScrController implements Initializable {
                     highlightTheLabel('o');
                 }
                 targetedBtn.setText(textOfBtn);
+                numberOfClickedBoxes++;
                 reviewTheBoard();
             }
         }
@@ -240,12 +245,9 @@ public class BoardScrController implements Initializable {
 
     private boolean isBoardFull() {
         boolean flag = false;
-        if (!box1.getText().equals("") && !box2.getText().equals("") && !box3.getText().equals("")
-           && !box4.getText().equals("")
-                && !box5.getText().equals("") && !box6.getText().equals("") && !box7.getText().equals("")
-                && !box8.getText().equals("") && !box9.getText().equals("")) {
-            flag = true;
-        }
+        if (numberOfClickedBoxes >= 9){
+                flag = true;
+            }
         return flag;
     }
 
@@ -323,6 +325,7 @@ public class BoardScrController implements Initializable {
         box9.setText("");
         box9.setStyle("-fx-background-color: #1F3274; ");
         textOfBtn = "X";
+        numberOfClickedBoxes = 0;
         highlightTheLabel('o');
     }
 
@@ -373,7 +376,7 @@ public class BoardScrController implements Initializable {
         if(score == 10 || score == -10 || score == 0){
             return score;
         }
-        if(isBoardFull()==true){
+        else if(isBoardFull()==true){
             return 0;
         }
         
@@ -408,7 +411,6 @@ public class BoardScrController implements Initializable {
         Button bestButton = new Button();
         int bestScore = Integer.MIN_VALUE;
         for(int i = 0 ; i<9 ; i++){
-        
             if(board[i].getText().equals("")){
                 board[i].setText(ai);
                 
