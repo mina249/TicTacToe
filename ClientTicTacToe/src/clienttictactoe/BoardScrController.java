@@ -344,21 +344,21 @@ public class BoardScrController implements Initializable {
             
             if(board[0].getText().equals(ai) || board[1].getText().equals(ai)|| board[2].getText().equals(ai)){
                 return 10;
-            }else{
+            }else if (board[0].getText().equals(user) || board[1].getText().equals(user)|| board[2].getText().equals(user)){
                 return -10;
             }
         }
         if(isAnyRowNotifyWinningSomeone()==true){
             if(board[0].getText().equals(ai) ||board[3].getText().equals(ai)|| board[6].getText().equals(ai)){
                 return 10;
-            }else{
+            }else if(board[0].getText().equals(user) ||board[3].getText().equals(user)|| board[6].getText().equals(user)){
                 return -10;
             }
         }
         if(isAnyDiagonalNotifyWinningSomeone()==true){
             if(board[0].getText().equals(ai) || board[2].getText().equals(ai)){
                 return 10;
-            }else{
+            }else if(board[0].getText().equals(user) || board[2].getText().equals(user)){
                 return -10;
             }
         }
