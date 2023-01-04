@@ -50,7 +50,11 @@ public class DiffecultyLevelScreenController implements Initializable {
     @FXML
     private void handleEasyBtnAction(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
+            Parent root= loader.load();
+            BoardScrController board_scr_controller= loader.getController();
+            board_scr_controller.displayNamesSingleMode();
+            board_scr_controller.intializeGameType("SINGLEPLAYER");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -63,7 +67,11 @@ public class DiffecultyLevelScreenController implements Initializable {
     @FXML
     private void handleMediumBtnAction(ActionEvent event) {
            try {
-            Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
+            Parent root= loader.load();
+            BoardScrController board_scr_controller= loader.getController();
+            board_scr_controller.displayNamesSingleMode();
+            board_scr_controller.intializeGameType("SINGLEPLAYER");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -76,7 +84,11 @@ public class DiffecultyLevelScreenController implements Initializable {
     @FXML
     private void handleHardBtnAction(ActionEvent event) {
          try {
-            Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
+           FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
+            Parent root= loader.load();
+            BoardScrController board_scr_controller= loader.getController();
+            board_scr_controller.displayNamesSingleMode();
+            board_scr_controller.intializeGameType("SINGLEPLAYER");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
