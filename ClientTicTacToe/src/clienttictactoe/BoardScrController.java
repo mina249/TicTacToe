@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -332,4 +333,18 @@ public class BoardScrController implements Initializable {
                 break;
         }
     }
+    
+    public void displayOName(String playeroName)
+    {
+        playerO.setText("Player O\n" + playeroName);
+        playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
+        playerO.setFont(new Font("Bookman Old Style", 35.0));
+    }
+    
+     public void displayXName(String playerxName)
+     {
+          playerX.setText("Player X\n" + playerxName);
+          playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
+          playerX.setFont(new Font("Bookman Old Style", 35.0));
+     }
 }
