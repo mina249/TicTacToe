@@ -135,7 +135,7 @@ public class Board extends Pane {
 
         playerX.setLayoutX(35.0);
         playerX.setLayoutY(138.0);
-        playerX.setPrefHeight(55.0);
+        playerX.setPrefHeight(100.0);
         playerX.setPrefWidth(175.0);
         //playerX.setText("Player X");
         playerX.setTextFill(javafx.scene.paint.Color.valueOf("#febd08"));
@@ -143,7 +143,7 @@ public class Board extends Pane {
 
         playerO.setLayoutX(898.0);
         playerO.setLayoutY(138.0);
-        playerO.setPrefHeight(55.0);
+        playerO.setPrefHeight(100.0);
         playerO.setPrefWidth(175.0);
         //playerO.setText("Player O");
         playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));

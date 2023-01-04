@@ -336,6 +336,7 @@ public class BoardScrController implements Initializable {
     
     public void displayOName(String playeroName)
     {
+        System.out.println(playeroName);
         playerO.setText("Player O\n" + playeroName);
         playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
         playerO.setFont(new Font("Bookman Old Style", 35.0));
@@ -343,6 +344,7 @@ public class BoardScrController implements Initializable {
     
      public void displayXName(String playerxName)
      {
+         System.out.println(playerxName);
           playerX.setText("Player X\n" + playerxName);
           playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
           playerX.setFont(new Font("Bookman Old Style", 35.0));
