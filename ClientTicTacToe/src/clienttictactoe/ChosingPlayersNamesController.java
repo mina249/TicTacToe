@@ -53,15 +53,12 @@ public class ChosingPlayersNamesController implements Initializable {
         
         String playeroName= player_o_name.getText();
         String playerxName= player_x_name.getText();
-        System.out.println(playeroName);
-        System.out.println(playerxName);
         FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
         Parent root= loader.load();
         BoardScrController board_scr_controller= loader.getController();
         board_scr_controller.displayOName(playeroName);
         board_scr_controller.displayXName(playerxName);
         board_scr_controller.intializeGameType("TWOPLAYERSLOCAL");
-        //Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
