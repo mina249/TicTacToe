@@ -240,7 +240,7 @@ public class BoardScrController implements Initializable {
     private boolean isBoardFull() {
         boolean flag = false;
         if (!box1.getText().equals("") && !box2.getText().equals("") && !box3.getText().equals("")
-                && !box4.getText().equals("")
+           && !box4.getText().equals("")
                 && !box5.getText().equals("") && !box6.getText().equals("") && !box7.getText().equals("")
                 && !box8.getText().equals("") && !box9.getText().equals("")) {
             flag = true;
@@ -249,11 +249,10 @@ public class BoardScrController implements Initializable {
     }
 
     private void reviewTheBoard() {
-        if (isAnyRowNotifyWinningSomeone() || isAnyColumnNotifyWinningSomeone()
-                || isAnyDiagonalNotifyWinningSomeone()) {
+        if (isAnyRowNotifyWinningSomeone() | isAnyColumnNotifyWinningSomeone()
+                | isAnyDiagonalNotifyWinningSomeone()) {
             handleWinningSomeOne();
         } else if (isBoardFull()) {
-            System.out.println("no one win..!");
             handleNoOneWin();
         }
     }
@@ -322,6 +321,7 @@ public class BoardScrController implements Initializable {
         box8.setStyle("-fx-background-color: #1F3274; ");
         box9.setText("");
         box9.setStyle("-fx-background-color: #1F3274; ");
+        textOfBtn = "X";
         highlightTheLabel('o');
     }
 
@@ -437,15 +437,35 @@ public class BoardScrController implements Initializable {
     return randomButton;
     }
     public Button mediumMode(){
-    
-        if(isEasy == false){
-        isEasy = true;
-        return hardMode();
+        if(board[0].getText().equals(board[1].getText()) && board[0].getText().equals(user)){
+            return board[2];
+        }else if(board[0].getText().equals(board[3].getText()) && board[0].getText().equals(user)){
+            return board[6];
+        }else if(board[3].getText().equals(board[4].getText()) && board[3].getText().equals(user)){
+            return board[5];
+        }else if(board[6].getText().equals(board[7].getText()) && board[7].getText().equals(user)){
+            return board[8];
+        }else if(board[1].getText().equals(board[4].getText()) && board[1].getText().equals(user)){
+            return board[7];
+        }else if(board[2].getText().equals(board[5].getText()) && board[2].getText().equals(user)){
+            return board[8];
+        }else if(board[0].getText().equals(board[4].getText()) && board[0].getText().equals(user)){
+            return board[8];
+        }else if(board[2].getText().equals(board[4].getText()) && board[2].getText().equals(user)){
+            return board[6];
         }else{
-            isEasy = false;
-            return easyMode();
-        
+            Random random = new Random();
+            int index;
+            while(true){
+                 index = random.nextInt(9);
+                if(board[index].getText().equals("")){
+                    break;
+                }
+                
+            }
+            return board[index];
         }
+        
     
     }
     public Button hardMode(){
