@@ -232,7 +232,7 @@ public class BoardScrController implements Initializable {
     private boolean isBoardFull() {
         boolean flag = false;
         if (!box1.getText().equals("") && !box2.getText().equals("") && !box3.getText().equals("")
-                && !box4.getText().equals("")
+           && !box4.getText().equals("")
                 && !box5.getText().equals("") && !box6.getText().equals("") && !box7.getText().equals("")
                 && !box8.getText().equals("") && !box9.getText().equals("")) {
             flag = true;
@@ -241,11 +241,10 @@ public class BoardScrController implements Initializable {
     }
 
     private void reviewTheBoard() {
-        if (isAnyRowNotifyWinningSomeone() || isAnyColumnNotifyWinningSomeone()
-                || isAnyDiagonalNotifyWinningSomeone()) {
+        if (isAnyRowNotifyWinningSomeone() | isAnyColumnNotifyWinningSomeone()
+                | isAnyDiagonalNotifyWinningSomeone()) {
             handleWinningSomeOne();
         } else if (isBoardFull()) {
-            System.out.println("no one win..!");
             handleNoOneWin();
         }
     }
@@ -314,6 +313,7 @@ public class BoardScrController implements Initializable {
         box8.setStyle("-fx-background-color: #1F3274; ");
         box9.setText("");
         box9.setStyle("-fx-background-color: #1F3274; ");
+        textOfBtn = "X";
         highlightTheLabel('o');
     }
 
