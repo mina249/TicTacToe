@@ -62,6 +62,7 @@ public class BoardScrController implements Initializable {
     private String ai = "X";
     private String user = "O";
     private String gameType;
+    private boolean justStarted = true;
 
 
     private enum GameStatus {
@@ -81,11 +82,15 @@ public class BoardScrController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentstatus = GameStatus.PLAYING;
-        currentGameType = GameType.TWOPLAYERSLOCAL; // Will remove when Farida finishes communication between pages
         highlightTheLabel('o');
         
+    }
+
+    @FXML
+    private void notifyPressing(ActionEvent event) {
+        if(justStarted == true)
+        {
         gameType = title.getText();
-        System.out.println(gameType);
         switch (gameType) {
             case "EASY":
                 currentGameType = GameType.EASY;
@@ -105,11 +110,8 @@ public class BoardScrController implements Initializable {
             default:
                 break;
         }
-    }
-
-    @FXML
-    private void notifyPressing(ActionEvent event) {
-        System.out.println(currentstatus);
+        justStarted = false;
+        }
         switch (currentGameType) {
             case EASY:
                 easyMode();
