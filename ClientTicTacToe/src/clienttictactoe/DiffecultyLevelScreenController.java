@@ -53,8 +53,7 @@ public class DiffecultyLevelScreenController implements Initializable {
             FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
             Parent root= loader.load();
             BoardScrController board_scr_controller= loader.getController();
-            board_scr_controller.displayNamesSingleMode();
-            board_scr_controller.intializeGameType("SINGLEPLAYER");
+            board_scr_controller.intializeLabels("EASY DIFFICULTY","","");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -70,8 +69,7 @@ public class DiffecultyLevelScreenController implements Initializable {
             FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
             Parent root= loader.load();
             BoardScrController board_scr_controller= loader.getController();
-            board_scr_controller.displayNamesSingleMode();
-            board_scr_controller.intializeGameType("SINGLEPLAYER");
+            board_scr_controller.intializeLabels("MEDIUM DIFFICULTY","","");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -87,8 +85,7 @@ public class DiffecultyLevelScreenController implements Initializable {
            FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
             Parent root= loader.load();
             BoardScrController board_scr_controller= loader.getController();
-            board_scr_controller.displayNamesSingleMode();
-            board_scr_controller.intializeGameType("SINGLEPLAYER");
+            board_scr_controller.intializeLabels("HARD DIFFICULTY","","");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

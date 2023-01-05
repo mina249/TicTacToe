@@ -50,20 +50,18 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Label layoutX="350.0" layoutY="23.0" prefHeight="65.0" prefWidth="99.0" text="Tic" textFill="#ff4948">
+      <Label fx:id="title" alignment="TOP_CENTER" focusTraversable="false" layoutX="274.0" layoutY="23.0" prefHeight="65.0" prefWidth="500.0" text="TIC TAC TOE" underline="true">
          <font>
             <Font name="Showcard Gothic" size="50.0" />
          </font>
-      </Label>
-      <Label layoutX="567.0" layoutY="23.0" prefHeight="65.0" prefWidth="99.0" text="Toe" textFill="#ff4948">
-         <font>
-            <Font name="Showcard Gothic" size="50.0" />
-         </font>
-      </Label>
-      <Label layoutX="457.0" layoutY="23.0" prefHeight="65.0" prefWidth="99.0" text="Tac" textFill="#febd08">
-         <font>
-            <Font name="Showcard Gothic" size="50.0" />
-         </font>
+         <textFill>
+            <LinearGradient endX="0.67" endY="1.0" startX="0.21" startY="1.0">
+               <stops>
+                  <Stop color="#ff4948" />
+                  <Stop color="#febd08" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Label>
       <Label fx:id="playerX" layoutX="35.0" layoutY="138.0" prefHeight="100.0" prefWidth="175.0" textFill="#febd08">
          <font>

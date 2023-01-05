@@ -1,12 +1,9 @@
 package clienttictactoe;
 
 import java.io.IOException;
-import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +29,8 @@ public class BoardScrController implements Initializable {
     @FXML
     private Label playerO;
     @FXML
+    private Label title;
+    @FXML
     private Button box1;
     @FXML
     private Button box9;
@@ -55,15 +54,14 @@ public class BoardScrController implements Initializable {
     private Button back_btn_board_sc;
     private String textOfBtn = "X";
     private Button targetedBtn;
-    private int firstPlayerScore = 0;
-    private int secondPlayerScore = 0;
+    private static int firstPlayerScore = 0;
+    private static int secondPlayerScore = 0;
     private int numberOfClickedBoxes = 0;
     private String winnerName;
-    private String gameStatus;
     private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
     private String ai = "X";
     private String user = "O";
-    private boolean isEasy = false;
+    private String gameType;
 
 
     private enum GameStatus {
@@ -71,12 +69,11 @@ public class BoardScrController implements Initializable {
     }
 
     private enum GameType {
-        SINGLEPLAYER, TWOPLAYERSLOCAL, ONLINEPLAY;
+        EASY, MEDIUM, HARD, TWOPLAYERSLOCAL, MULTIPLAYER;
     }
 
     GameStatus currentstatus;
     GameType currentGameType;
-
 
     /**
      * Initializes the controller class.
@@ -86,16 +83,24 @@ public class BoardScrController implements Initializable {
         currentstatus = GameStatus.PLAYING;
         currentGameType = GameType.TWOPLAYERSLOCAL; // Will remove when Farida finishes communication between pages
         highlightTheLabel('o');
-        intializeGameType("");
-        switch (currentGameType) {
-            case SINGLEPLAYER:
-                
+        
+        gameType = title.getText();
+        System.out.println(gameType);
+        switch (gameType) {
+            case "EASY":
+                currentGameType = GameType.EASY;
                 break;
-            case TWOPLAYERSLOCAL:
-                
+            case "MEDIUM":
+                currentGameType = GameType.MEDIUM;
                 break;
-            case ONLINEPLAY:
-                
+            case "HARD":
+                currentGameType = GameType.HARD;
+                break;
+            case "TWOPLAYERS":
+                currentGameType = GameType.TWOPLAYERSLOCAL;
+                break;
+            case "MULTIPLAYER":
+                currentGameType = GameType.MULTIPLAYER;
                 break;
             default:
                 break;
@@ -104,14 +109,20 @@ public class BoardScrController implements Initializable {
 
     @FXML
     private void notifyPressing(ActionEvent event) {
+        System.out.println(currentstatus);
         switch (currentGameType) {
-            case SINGLEPLAYER:
-                // handleThePressedBtnTwoPlayersMood(event);
+            case EASY:
+                easyMode();
+                break;
+            case MEDIUM:
+                break;
+            case HARD:
+                
                 break;
             case TWOPLAYERSLOCAL:
                 handleThePressedBtnTwoPlayersMood(event);
                 break;
-            case ONLINEPLAY:
+            case MULTIPLAYER:
                 break;
             default:
                 break;
@@ -476,46 +487,28 @@ public class BoardScrController implements Initializable {
     }
     
 
-    public void intializeGameType(String type) {
-        switch (type) {
-            case "SINGLEPLAYER":
-                currentGameType = GameType.SINGLEPLAYER;
-                break;
-            case "TWOPLAYERSLOCAL":
-                currentGameType = GameType.TWOPLAYERSLOCAL;
-                break;
-            case "ONLINEPLAY":
-                currentGameType = GameType.ONLINEPLAY;
-                break;
-            default:
-                break;
-        }
-    }
-    
-    public void displayOName(String playeroName)
-    {
-        playerO.setText("Player O\n" + playeroName);
-        playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-        playerO.setFont(new Font("Bookman Old Style", 35.0));
-    }
-    
-     public void displayXName(String playerxName)
+     public void intializeLabels(String titles, String playerxName, String playeroName)
      {
-          playerX.setText("Player X\n" + playerxName);
-          playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-          playerX.setFont(new Font("Bookman Old Style", 35.0));
-     }
-     
-     public void displayNamesSingleMode()
-     {
+        title.setText(titles);
+        if(titles.contains("DIFFICULTY"))
+        {
         playerX.setText("Player X\n" + "You");
-        playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-        playerX.setFont(new Font("Bookman Old Style", 35.0));
-          
         playerO.setText("Player O\n" + "Computer");
+        }
+        else if(titles.equals("TWOPLAYERS"))
+        {
+        playerX.setText("Player X\n" + playerxName);
+        playerO.setText("Player O\n" + playeroName);
+        }
+        else if(titles.equals("MULTIPLAYER"))
+        {
+        }
+        
+        playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
         playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
+        playerX.setFont(new Font("Bookman Old Style", 35.0));
         playerO.setFont(new Font("Bookman Old Style", 35.0));
-     }
+     } 
 }
 
 
