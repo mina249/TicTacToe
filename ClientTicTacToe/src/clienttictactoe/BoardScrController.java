@@ -513,8 +513,8 @@ public class BoardScrController implements Initializable {
         title.setText(titles);
         if(titles.contains("DIFFICULTY"))
         {
-            playerX.setText("Player X\n" + "You");
-            playerO.setText("Player O\n" + "Computer");
+            playerX.setText("Player O\n" + "You");
+            playerO.setText("Player X\n" + "Computer");
         }
         else if(titles.equals("TWOPLAYERS"))
         {
