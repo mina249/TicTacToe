@@ -1,9 +1,13 @@
 package clienttictactoe;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -28,6 +36,8 @@ public class BoardScrController implements Initializable {
     private Label playerX;
     @FXML
     private Label playerO;
+    @FXML
+    private Label title;
     @FXML
     private Button box1;
     @FXML
@@ -50,68 +60,92 @@ public class BoardScrController implements Initializable {
     private Button playAgain;
     @FXML
     private Button back_btn_board_sc;
+    @FXML
+    private MediaView videoPlayer;
+    private Media media;
+    private MediaPlayer mediaPlayer;
+    private File mediaFile;
     private String textOfBtn = "X";
     private Button targetedBtn;
-    private int firstPlayerScore = 0;
-    private int secondPlayerScore = 0;
+    private static int firstPlayerScore = 0;
+    private static int secondPlayerScore = 0;
+    private int numberOfClickedBoxes = 0;
     private String winnerName;
-    private String gameStatus;
     private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
     private String ai = "X";
     private String user = "O";
-    private boolean isEasy = false;
-
+    private String gameType;
+    private boolean justStarted = true;
+    
 
     private enum GameStatus {
         TERMINATED, PLAYING, WINFIRSTPLAYER, WINSECONDPLAYER, DRAW;
     }
 
     private enum GameType {
-        SINGLEPLAYER, TWOPLAYERSLOCAL, ONLINEPLAY;
+        EASY, MEDIUM, HARD, TWOPLAYERSLOCAL, MULTIPLAYER;
     }
 
-    GameStatus currentstatus;
+    GameStatus currentStatus;
     GameType currentGameType;
-
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentstatus = GameStatus.PLAYING;
-        currentGameType = GameType.TWOPLAYERSLOCAL; // Will remove when Farida finishes communication between pages
+        currentStatus = GameStatus.PLAYING;
         highlightTheLabel('o');
-        intializeGameType("");
-        switch (currentGameType) {
-            case SINGLEPLAYER:
-                
-                break;
-            case TWOPLAYERSLOCAL:
-                
-                break;
-            case ONLINEPLAY:
-                
-                break;
-            default:
-                break;
-        }
+        
     }
 
     @FXML
     private void notifyPressing(ActionEvent event) {
-        switch (currentGameType) {
-            case SINGLEPLAYER:
-                // handleThePressedBtnTwoPlayersMood(event);
+        // Sets difficulty or game type after first button press
+        if(justStarted == true)
+        {    
+        gameType = title.getText();
+        switch (gameType) {
+            case "EASY DIFFICULTY":
+                currentGameType = GameType.EASY;
                 break;
-            case TWOPLAYERSLOCAL:
-                handleThePressedBtnTwoPlayersMood(event);
+            case "MEDIUM DIFFICULTY":
+                currentGameType = GameType.MEDIUM;
                 break;
-            case ONLINEPLAY:
+            case "HARD DIFFICULTY":
+                currentGameType = GameType.HARD;
+                break;
+            case "TWOPLAYERS":
+                currentGameType = GameType.TWOPLAYERSLOCAL;
+                break;
+            case "MULTIPLAYER":
+                currentGameType = GameType.MULTIPLAYER;
                 break;
             default:
                 break;
         }
+        justStarted = false;
+        }
+      
+        
+        switch (currentGameType) {
+            case EASY:
+                easyMode();
+                break;
+            case MEDIUM:
+                break;
+            case HARD:
+                
+                break;
+            case TWOPLAYERSLOCAL:
+                handleThePressedBtnTwoPlayersMood(event);
+                break;
+            case MULTIPLAYER:
+                break;
+            default:
+                break;
+        }
+        System.out.println(currentStatus);
     }
 
     @FXML
@@ -121,7 +155,7 @@ public class BoardScrController implements Initializable {
     
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException {
-        currentstatus = GameStatus.TERMINATED;
+        currentStatus = GameStatus.TERMINATED;
         Parent root = FXMLLoader.load(getClass().getResource("HomePageScreen.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -130,7 +164,7 @@ public class BoardScrController implements Initializable {
     }
 
     public void handleThePressedBtnTwoPlayersMood(ActionEvent e) {
-        if (currentstatus == GameStatus.PLAYING) {
+        if (currentStatus == GameStatus.PLAYING) {
             targetedBtn = (Button) e.getSource();
             if (targetedBtn.getText().equals("")) {
                 if (textOfBtn == "X") {
@@ -143,6 +177,7 @@ public class BoardScrController implements Initializable {
                     highlightTheLabel('o');
                 }
                 targetedBtn.setText(textOfBtn);
+                numberOfClickedBoxes++;
                 reviewTheBoard();
             }
         }
@@ -154,27 +189,27 @@ public class BoardScrController implements Initializable {
                 && !box1.getText().equals("")) {
             highlightThusBtns(box1, box2, box3);
             if (box1.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         } else if (box4.getText().equals(box5.getText()) && box5.getText().equals(box6.getText())
                 && !box4.getText().equals("")) {
             highlightThusBtns(box4, box5, box6);
             if (box4.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         } else if (box7.getText().equals(box8.getText()) && box8.getText().equals(box9.getText())
                 && !box7.getText().equals("")) {
             highlightThusBtns(box7, box8, box9);
             if (box7.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         }
@@ -187,27 +222,27 @@ public class BoardScrController implements Initializable {
                 && !box1.getText().equals("")) {
             highlightThusBtns(box1, box4, box7);
             if (box1.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         } else if (box2.getText().equals(box5.getText()) && box5.getText().equals(box8.getText())
                 && !box2.getText().equals("")) {
             highlightThusBtns(box2, box5, box8);
             if (box2.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         } else if (box3.getText().equals(box6.getText()) && box6.getText().equals(box9.getText())
                 && !box3.getText().equals("")) {
             highlightThusBtns(box3, box6, box9);
             if (box3.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         }
@@ -220,18 +255,18 @@ public class BoardScrController implements Initializable {
                 && !box1.getText().equals("")) {
             highlightThusBtns(box1, box5, box9);
             if (box1.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         } else if (box3.getText().equals(box5.getText()) && box5.getText().equals(box7.getText())
                 && !box3.getText().equals("")) {
             highlightThusBtns(box3, box5, box7);
             if (box3.getText().equals("X")) {
-                currentstatus = GameStatus.WINFIRSTPLAYER;
+                currentStatus = GameStatus.WINFIRSTPLAYER;
             } else {
-                currentstatus = GameStatus.WINSECONDPLAYER;
+                currentStatus = GameStatus.WINSECONDPLAYER;
             }
             flag = true;
         }
@@ -240,12 +275,9 @@ public class BoardScrController implements Initializable {
 
     private boolean isBoardFull() {
         boolean flag = false;
-        if (!box1.getText().equals("") && !box2.getText().equals("") && !box3.getText().equals("")
-           && !box4.getText().equals("")
-                && !box5.getText().equals("") && !box6.getText().equals("") && !box7.getText().equals("")
-                && !box8.getText().equals("") && !box9.getText().equals("")) {
-            flag = true;
-        }
+        if (numberOfClickedBoxes >= 9){
+                flag = true;
+            }
         return flag;
     }
 
@@ -270,14 +302,15 @@ public class BoardScrController implements Initializable {
         }
     }
 
-    public void handleWinningSomeOne() {
-        if (currentstatus == GameStatus.WINFIRSTPLAYER) {
+    public void handleWinningSomeOne(){
+        if (currentStatus == GameStatus.WINFIRSTPLAYER) {
             firstPlayerScore += 10;
             highlightTheLabel('x');
-        } else if (currentstatus == GameStatus.WINSECONDPLAYER) {
+        } else if (currentStatus == GameStatus.WINSECONDPLAYER) {
             secondPlayerScore += 10;
             highlightTheLabel('o');
         }
+        playVideo();
     }
 
     public void handleNoOneWin() {
@@ -303,7 +336,7 @@ public class BoardScrController implements Initializable {
     }
 
     private void setStandrdStart() {
-        currentstatus = GameStatus.PLAYING;
+        currentStatus = GameStatus.PLAYING;
         box1.setText("");
         box1.setStyle("-fx-background-color: #1F3274; ");
         box2.setText("");
@@ -323,7 +356,9 @@ public class BoardScrController implements Initializable {
         box9.setText("");
         box9.setStyle("-fx-background-color: #1F3274; ");
         textOfBtn = "X";
+        numberOfClickedBoxes = 0;
         highlightTheLabel('o');
+        removeVideo();
     }
 
     
@@ -373,7 +408,7 @@ public class BoardScrController implements Initializable {
         if(score == 10 || score == -10 || score == 0){
             return score;
         }
-        if(isBoardFull()==true){
+        else if(isBoardFull()==true){
             return 0;
         }
         
@@ -408,7 +443,6 @@ public class BoardScrController implements Initializable {
         Button bestButton = new Button();
         int bestScore = Integer.MIN_VALUE;
         for(int i = 0 ; i<9 ; i++){
-        
             if(board[i].getText().equals("")){
                 board[i].setText(ai);
                 
@@ -474,46 +508,56 @@ public class BoardScrController implements Initializable {
     }
     
 
-    public void intializeGameType(String type) {
-        switch (type) {
-            case "SINGLEPLAYER":
-                currentGameType = GameType.SINGLEPLAYER;
-                break;
-            case "TWOPLAYERSLOCAL":
-                currentGameType = GameType.TWOPLAYERSLOCAL;
-                break;
-            case "ONLINEPLAY":
-                currentGameType = GameType.ONLINEPLAY;
-                break;
-            default:
-                break;
-        }
-    }
-    
-    public void displayOName(String playeroName)
-    {
-        playerO.setText("Player O\n" + playeroName);
-        playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-        playerO.setFont(new Font("Bookman Old Style", 35.0));
-    }
-    
-     public void displayXName(String playerxName)
+     public void intializeLabels(String titles, String playerxName, String playeroName)
      {
-          playerX.setText("Player X\n" + playerxName);
-          playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-          playerX.setFont(new Font("Bookman Old Style", 35.0));
+        title.setText(titles);
+        if(titles.contains("DIFFICULTY"))
+        {
+            playerX.setText("Player X\n" + "You");
+            playerO.setText("Player O\n" + "Computer");
+        }
+        else if(titles.equals("TWOPLAYERS"))
+        {
+            playerX.setText("Player X\n" + playerxName);
+            playerO.setText("Player O\n" + playeroName);
+        }
+        else if(titles.equals("MULTIPLAYER"))
+        {
+        }
+        
+        playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
+        playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
+        playerX.setFont(new Font("Bookman Old Style", 35.0));
+        playerO.setFont(new Font("Bookman Old Style", 35.0));
+     } 
+     public void playVideo()
+     {
+        if(currentStatus == GameStatus.WINFIRSTPLAYER)
+        {
+            mediaFile = new File("src/clienttictactoe/Fireworks.mp4");
+        }
+        else
+        {
+            mediaFile = new File("src/clienttictactoe/Fireworks.mp4");
+        }
+        try {
+            media = new Media(mediaFile.toURI().toURL().toString());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BoardScrController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        mediaPlayer = new MediaPlayer(media);
+        videoPlayer.setMediaPlayer(mediaPlayer);
+        //mediaPlayer.setMute(true);
+        videoPlayer.setVisible(true);
+        videoPlayer.setFitHeight(600);
+        videoPlayer.setFitWidth(1080);
+        mediaPlayer.play();
      }
      
-     public void displayNamesSingleMode()
+     public void removeVideo()
      {
-        playerX.setText("Player X\n" + "You");
-        playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-        playerX.setFont(new Font("Bookman Old Style", 35.0));
-          
-        playerO.setText("Player O\n" + "Computer");
-        playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
-        playerO.setFont(new Font("Bookman Old Style", 35.0));
+        // On mouse click
+        mediaPlayer.stop();
+        videoPlayer.setVisible(false);
      }
 }
-
-
