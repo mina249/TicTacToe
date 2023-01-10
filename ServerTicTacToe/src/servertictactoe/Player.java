@@ -5,7 +5,7 @@ public class Player {
     private String name;
     private String email;
     private String password;
-    private String status;
+    private String playerStatus;
     private int totalScore;
     private int numPlayedGames;
 
@@ -21,22 +21,22 @@ public class Player {
     }
     
     // All
-    public Player(int id, String name, String email, String password, String status, int totalScore, int numPlayedGames) {
+    public Player(int id, String name, String email, String password, String playerStatus, int totalScore, int numPlayedGames) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.status = status;
+        this.playerStatus = playerStatus;
         this.totalScore = totalScore;
         this.numPlayedGames = numPlayedGames;
     }
         
     // All except ID
-    public Player(String name, String email, String password, String status, int totalScore, int numPlayedGames) {
+    public Player(String name, String email, String password, String playerStatus, int totalScore, int numPlayedGames) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.status = status;
+        this.playerStatus = playerStatus;
         this.totalScore = totalScore;
         this.numPlayedGames = numPlayedGames;
     }
@@ -53,8 +53,8 @@ public class Player {
         this.password = password;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String playerStatus) {
+        this.playerStatus = playerStatus;
     }
 
     public void setTotalScore(int totalScore) {
@@ -82,7 +82,7 @@ public class Player {
     }
 
     public String getStatus() {
-        return status;
+        return playerStatus;
     }
 
     public int getTotalScore() {
