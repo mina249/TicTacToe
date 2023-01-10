@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,30 +32,18 @@ public class BoardScrController implements Initializable {
     private Label playerX;
     @FXML
     private Label playerO;
-    @FXML
     private Button box1;
-    @FXML
     private Button box9;
-    @FXML
     private Button box8;
-    @FXML
     private Button box7;
-    @FXML
     private Button box6;
-    @FXML
     private Button box5;
-    @FXML
     private Button box4;
-    @FXML
     private Button box3;
-    @FXML
     private Button box2;
-    @FXML
-    private Button playAgain;
-    @FXML
-    private Button back_btn_board_sc;
     private String textOfBtn = "X";
     private Button targetedBtn;
+    private Button aiBtn;
     private int firstPlayerScore = 0;
     private int secondPlayerScore = 0;
     private int numberOfClickedBoxes = 0;
@@ -63,7 +52,29 @@ public class BoardScrController implements Initializable {
     private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
     private String ai = "X";
     private String user = "O";
-    private boolean isEasy = false;
+    private boolean isAiTurn= true;
+    @FXML
+    private Button Btn1;
+    @FXML
+    private Button Btn9;
+    @FXML
+    private Button Btn8;
+    @FXML
+    private Button Btn7;
+    @FXML
+    private Button Btn6;
+    @FXML
+    private Button Btn5;
+    @FXML
+    private Button Btn4;
+    @FXML
+    private Button Btn3;
+    @FXML
+    private Button Btn2;
+    @FXML
+    private Button playAgainBtn;
+    @FXML
+    private Button back_btn_Easyboard_sc;
 
 
     private enum GameStatus {
@@ -71,7 +82,7 @@ public class BoardScrController implements Initializable {
     }
 
     private enum GameType {
-        SINGLEPLAYER, TWOPLAYERSLOCAL, ONLINEPLAY;
+        EASY, MEDIUM,HARD, TWOPLAYERSLOCAL, ONLINEPLAY;
     }
 
     GameStatus currentstatus;
@@ -84,11 +95,17 @@ public class BoardScrController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentstatus = GameStatus.PLAYING;
-        currentGameType = GameType.TWOPLAYERSLOCAL; // Will remove when Farida finishes communication between pages
-        highlightTheLabel('o');
+        currentGameType = GameType.EASY; // Will remove when Farida finishes communication between pages
+        highlightTheLabel('x');
         intializeGameType("");
         switch (currentGameType) {
-            case SINGLEPLAYER:
+            case EASY:
+                
+                break;
+            case MEDIUM:
+                
+                break;
+            case HARD:
                 
                 break;
             case TWOPLAYERSLOCAL:
@@ -105,8 +122,25 @@ public class BoardScrController implements Initializable {
     @FXML
     private void notifyPressing(ActionEvent event) {
         switch (currentGameType) {
-            case SINGLEPLAYER:
-                // handleThePressedBtnTwoPlayersMood(event);
+            case EASY:
+              Platform.runLater(new Runnable(){
+              
+              
+              public void run(){
+              
+                  handleButtonPressedEasy(event);
+                  
+              }
+              
+              
+              });
+                
+                break;
+                case MEDIUM:
+                
+                break;
+            case HARD:
+               
                 break;
             case TWOPLAYERSLOCAL:
                 handleThePressedBtnTwoPlayersMood(event);
@@ -336,37 +370,39 @@ public class BoardScrController implements Initializable {
     
    
     public boolean notifiyWining(){
+        boolean flag =false;
         
-        if(isAnyColumnNotifyWinningSomeone()==true || isAnyDiagonalNotifyWinningSomeone()==true || isAnyRowNotifyWinningSomeone()==true)
-            return true;
+        if(isAnyColumnNotifyWinningSomeone() | isAnyDiagonalNotifyWinningSomeone() | isAnyRowNotifyWinningSomeone())
+            flag =  true;
         
-        return false;
+        return flag;
     }
     public int evaluateBoard(Button[]board){
+        int evaluatedScore = 0;
     
         if(isAnyColumnNotifyWinningSomeone()==true){
             
             if(board[0].getText().equals(ai) || board[1].getText().equals(ai)|| board[2].getText().equals(ai)){
-                return 10;
+                evaluatedScore = 10;
             }else if (board[0].getText().equals(user) || board[1].getText().equals(user)|| board[2].getText().equals(user)){
-                return -10;
+                 evaluatedScore = -10;
             }
         }
         if(isAnyRowNotifyWinningSomeone()==true){
             if(board[0].getText().equals(ai) ||board[3].getText().equals(ai)|| board[6].getText().equals(ai)){
-                return 10;
+                evaluatedScore = 10;
             }else if(board[0].getText().equals(user) ||board[3].getText().equals(user)|| board[6].getText().equals(user)){
-                return -10;
+                 evaluatedScore = -10;
             }
         }
         if(isAnyDiagonalNotifyWinningSomeone()==true){
             if(board[0].getText().equals(ai) || board[2].getText().equals(ai)){
-                return 10;
+                 evaluatedScore = 10;
             }else if(board[0].getText().equals(user) || board[2].getText().equals(user)){
-                return -10;
+                 evaluatedScore = -10;
             }
         }
-        return 0;
+        return evaluatedScore;
     }
     
     
@@ -429,33 +465,31 @@ public class BoardScrController implements Initializable {
     public Button easyMode(){
     int index;
     Random random = new Random();
-    Button randomButton = new Button();
-    while(true){
+    
+   do{
         index = random.nextInt(9);
-        if(board[index].getText().equals("")){
-            randomButton = board[index];
-            break;
-        }
-    }
-    return randomButton;
+       
+    }while(!board[index].getText().equals(""));
+       return board[index];
     }
     public Button mediumMode(){
+        Button mediumButton = new Button();
         if(board[0].getText().equals(board[1].getText()) && board[0].getText().equals(user)){
-            return board[2];
+            mediumButton = board[2];
         }else if(board[0].getText().equals(board[3].getText()) && board[0].getText().equals(user)){
-            return board[6];
+            mediumButton = board[6];
         }else if(board[3].getText().equals(board[4].getText()) && board[3].getText().equals(user)){
-            return board[5];
+            mediumButton = board[5];
         }else if(board[6].getText().equals(board[7].getText()) && board[7].getText().equals(user)){
-            return board[8];
+            mediumButton = board[8];
         }else if(board[1].getText().equals(board[4].getText()) && board[1].getText().equals(user)){
-            return board[7];
+           mediumButton = board[7];
         }else if(board[2].getText().equals(board[5].getText()) && board[2].getText().equals(user)){
-            return board[8];
+            mediumButton = board[8];
         }else if(board[0].getText().equals(board[4].getText()) && board[0].getText().equals(user)){
-            return board[8];
+            mediumButton = board[8];
         }else if(board[2].getText().equals(board[4].getText()) && board[2].getText().equals(user)){
-            return board[6];
+            mediumButton = board[6];
         }else{
             Random random = new Random();
             int index;
@@ -466,10 +500,10 @@ public class BoardScrController implements Initializable {
                 }
                 
             }
-            return board[index];
+            mediumButton = board[index];
         }
         
-    
+        return mediumButton;
     }
     public Button hardMode(){
         return findBestPlay(board);
@@ -478,8 +512,14 @@ public class BoardScrController implements Initializable {
 
     public void intializeGameType(String type) {
         switch (type) {
-            case "SINGLEPLAYER":
-                currentGameType = GameType.SINGLEPLAYER;
+            case "EASY":
+                currentGameType = GameType.EASY;
+                break;
+                  case "HARD":
+                currentGameType = GameType.HARD;
+                break;
+                  case "MEDIUM":
+                currentGameType = GameType.MEDIUM;
                 break;
             case "TWOPLAYERSLOCAL":
                 currentGameType = GameType.TWOPLAYERSLOCAL;
@@ -508,14 +548,35 @@ public class BoardScrController implements Initializable {
      
      public void displayNamesSingleMode()
      {
-        playerX.setText("Player X\n" + "You");
+        playerX.setText("Player O\n" + "You");
         playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
         playerX.setFont(new Font("Bookman Old Style", 35.0));
           
-        playerO.setText("Player O\n" + "Computer");
+        playerO.setText("Player X\n" + "Computer");
         playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
         playerO.setFont(new Font("Bookman Old Style", 35.0));
      }
+     
+    public void handleButtonPressedEasy(ActionEvent e){
+        if(currentstatus == GameStatus.PLAYING) {
+            targetedBtn = (Button) e.getSource();
+            if(targetedBtn.getText().equals("")){
+                targetedBtn.setText(user);
+                targetedBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
+                highlightTheLabel('o');
+                reviewTheBoard();
+               aiBtn = board[0];
+                aiBtn.setText(ai);
+                aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
+                highlightTheLabel('x');
+                reviewTheBoard();
+            }  
+            
+       }
+     
+    }
+ 
 }
+
 
 

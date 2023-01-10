@@ -5,6 +5,7 @@
  */
 package clienttictactoe;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -43,22 +44,26 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }  
+    }    
+
     @FXML
-    public void handleSignupButtonAction(ActionEvent event) throws Exception{
+    private void handlBackButtonAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("HomePageScreen.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void handleSignupButtonAction(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("OnlinePlayerList.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
-    @FXML
-     public void handlBackButtonAction(ActionEvent event) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-   
+
+    
+    
 }

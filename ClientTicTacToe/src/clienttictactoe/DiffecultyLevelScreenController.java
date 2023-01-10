@@ -54,7 +54,7 @@ public class DiffecultyLevelScreenController implements Initializable {
             Parent root= loader.load();
             BoardScrController board_scr_controller= loader.getController();
             board_scr_controller.displayNamesSingleMode();
-            board_scr_controller.intializeGameType("SINGLEPLAYER");
+            board_scr_controller.intializeGameType("EASY");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -71,7 +71,7 @@ public class DiffecultyLevelScreenController implements Initializable {
             Parent root= loader.load();
             BoardScrController board_scr_controller= loader.getController();
             board_scr_controller.displayNamesSingleMode();
-            board_scr_controller.intializeGameType("SINGLEPLAYER");
+            board_scr_controller.intializeGameType("MEDIUM");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -88,7 +88,7 @@ public class DiffecultyLevelScreenController implements Initializable {
             Parent root= loader.load();
             BoardScrController board_scr_controller= loader.getController();
             board_scr_controller.displayNamesSingleMode();
-            board_scr_controller.intializeGameType("SINGLEPLAYER");
+            board_scr_controller.intializeGameType("HARD");
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
