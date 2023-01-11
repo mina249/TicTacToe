@@ -24,10 +24,12 @@ import java.util.logging.Logger;
 public class ServerSide {
     
     ServerSocket serverSocket;
+    Thread thread;
 
     public ServerSide() {
+         thread = new Thread(()->{
         try {
-            serverSocket = new ServerSocket(5009);
+           serverSocket = new ServerSocket(5009);
             while(true){
                 Socket clientSocket = serverSocket.accept();
                 new PlayerHandler(clientSocket);
@@ -36,8 +38,13 @@ public class ServerSide {
         } catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+         });
+         thread.start();
     }
+    public static void main(String [] args){
+            new ServerSide();
+    }
+            
     
     
 }
