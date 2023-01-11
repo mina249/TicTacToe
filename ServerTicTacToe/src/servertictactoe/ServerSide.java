@@ -27,17 +27,21 @@ public class ServerSide {
     Thread thread;
 
     public ServerSide() {
-         thread = new Thread(()->{
-        try {
-           serverSocket = new ServerSocket(5009);
+       
+        thread = new Thread(()->{
+>>
             while(true){
+        try {
+            
+            
                 Socket clientSocket = serverSocket.accept();
                 new PlayerHandler(clientSocket);
                 
             }
-        } catch (IOException ex) {
+        catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
         }
+
          });
          thread.start();
     }
@@ -45,6 +49,14 @@ public class ServerSide {
             new ServerSide();
     }
             
-    
-    
-}
+
+            }
+    });
+        
+        thread.start();
+    }
+    public static void main(String [] args) {
+        new ServerSide();
+
+    }
+} 

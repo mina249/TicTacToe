@@ -5,7 +5,10 @@
  */
 package clienttictactoe;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -39,13 +42,14 @@ public class SignInController implements Initializable {
     private Button btn_SiginIn;
     @FXML
     private Button btn_SiginUp;
-
+    Thread th;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     @FXML
     public void handleSignupButtonAction(ActionEvent event) throws Exception{
@@ -67,11 +71,29 @@ public class SignInController implements Initializable {
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("OnlinePlayerList.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            
+             Socket mysocket;
+            DataInputStream ear;
+            PrintStream mouth;
+            String msg;
+            String reply;
+            mysocket= new Socket("127.0.0.1",5009);
+            mouth= new PrintStream(mysocket.getOutputStream());
+            msg= "login" + ";" + tf_UserName.getText() + ";" + tf_Password.getText();
+            mouth.println(msg);
+            ear= new DataInputStream(mysocket.getInputStream());
+            reply= ear.readLine();
+            if(reply.equals("0"))
+            {
+                tf_UserName.setText("User name or password is incorrect");
+                tf_UserName.setStyle("-fx-text-fill red");
+            }else {
+                Parent root = FXMLLoader.load(getClass().getResource("OnlinePlayerList.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -12,10 +12,17 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import static servertictactoe.Database.onlinePlayerList;
+import static servertictactoe.Database.serverPlayerList;
+import static sun.audio.AudioPlayer.player;
 
 /**
  *
@@ -31,26 +38,40 @@ public class PlayerHandler extends Thread {
  private String status;
  Socket socket;
  static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
+ Socket socket;
+ PrintStream ps;  
+    private String username;
+    private String email;
+    private String password;
+    private String status;
+    private int totalScore;
+    private int numPlayedGames;
+ static Vector<PlayerHandler> players = new Vector<PlayerHandler>();   
  
  public PlayerHandler(Socket cs)
 {
      try {
          dis = new DataInputStream(cs.getInputStream());
          ps = new PrintStream(cs.getOutputStream());
-         socket = cs;
+
+ 
+
+        socket = cs;
+
          start();
      } catch (IOException ex) {
         ex.printStackTrace();
      }
 }
  
- public void run()
+public void run()
 {
 while(true)
 {
     try {
-        String completeMsg = dis.readUTF();
-        StringTokenizer tokenizer = new StringTokenizer("completeMsg",";");
+        String completeMsg = dis.readLine();
+        System.out.println(completeMsg);
+        StringTokenizer tokenizer = new StringTokenizer(completeMsg,";");
         
         String header = tokenizer.nextToken();
         switch (header){
@@ -58,6 +79,7 @@ while(true)
                 
                 break;
             case "login":
+
                 players.add(this);
                 
                 
@@ -69,8 +91,53 @@ while(true)
                 
                 
                 
+
+               String nameL= tokenizer.nextToken();
+               String pswL= tokenizer.nextToken();
+               int result;
+        try {
+            result = DataAccessLayer.logIn(nameL, pswL);
+             if (result==1)
+                {
+                    userName= nameL;
+                    passWord= pswL;
+                    players.add(this);
+                    ps.println("1;" + userName);
+                }
+                else
+                {
+                    ps.println("0");
+                    socket.close();
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
+
                 break;
             case "signup":
+                String mail= tokenizer.nextToken();
+                String nameS= tokenizer.nextToken();
+               String pswS= tokenizer.nextToken();
+               int resultS = 0;
+        try {
+            resultS = DataAccessLayer.signUp(mail, nameS, pswS);
+             if (resultS==1)
+                {
+                    ps.println("1");
+                    socket.close();
+                    
+                }
+                else
+                {
+                    ps.println("0");
+                    socket.close();
+                }
+               
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
                 break;
             default:
                 break;
@@ -78,22 +145,14 @@ while(true)
         Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-
 }
- 
  
  private void sendRequest(String sender , String reciever){
      for(int i = 0 ; i< players.size();i++){
-         if(players.get(i).userName.equals(reciever) && players.get(i).status.equals("online")){
+         if(players.get(i).username.equals(reciever) && players.get(i).status.equals("online")){
          
              players.get(i).ps.println("request;"+sender+reciever);
          }
-     
-     }
-     
- }
-
- 
- 
-    
+     }  
+ }   
 }
