@@ -9,7 +9,7 @@ package servertictactoe;
  *
  * @author ميناناجحعبدالمسيحزكى
  */
-package servertictactoe;
+
 
 import java.io.IOException;
 import java.net.ServerSocket;

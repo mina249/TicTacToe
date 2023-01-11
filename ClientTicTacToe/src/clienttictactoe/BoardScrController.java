@@ -71,11 +71,12 @@ public class BoardScrController implements Initializable {
     private static int secondPlayerScore = 0;
     private int numberOfClickedBoxes = 0;
     private String winnerName;
-    private Button []board = {box1,box2,box3,box4,box5,box6,box7,box8,box9};
     private String ai = "X";
     private String user = "O";
     private String gameType;
     private boolean justStarted = true;
+    private Button [] board = new Button[9];
+    private Button aiBtn;
     
 
     private enum GameStatus {
@@ -96,7 +97,15 @@ public class BoardScrController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         currentStatus = GameStatus.PLAYING;
         highlightTheLabel('o');
-        
+        board[0] = box1;
+        board[1]= box2;
+        board[2]= box3;
+        board[3]= box4;
+        board[4]= box5;
+        board[5]= box6;
+        board[6]= box7;
+        board[7]= box8;
+        board[8]= box9;
     }
 
     @FXML
@@ -130,9 +139,10 @@ public class BoardScrController implements Initializable {
         
         switch (currentGameType) {
             case EASY:
-                easyMode();
+                handleEasyModeOnPressed(event);
                 break;
             case MEDIUM:
+                handleMediumModeOnPressed(event);
                 break;
             case HARD:
                 
@@ -374,138 +384,11 @@ public class BoardScrController implements Initializable {
         
         return false;
     }
-    public int evaluateBoard(Button[]board){
     
-        if(isAnyColumnNotifyWinningSomeone()==true){
-            
-            if(board[0].getText().equals(ai) || board[1].getText().equals(ai)|| board[2].getText().equals(ai)){
-                return 10;
-            }else if (board[0].getText().equals(user) || board[1].getText().equals(user)|| board[2].getText().equals(user)){
-                return -10;
-            }
-        }
-        if(isAnyRowNotifyWinningSomeone()==true){
-            if(board[0].getText().equals(ai) ||board[3].getText().equals(ai)|| board[6].getText().equals(ai)){
-                return 10;
-            }else if(board[0].getText().equals(user) ||board[3].getText().equals(user)|| board[6].getText().equals(user)){
-                return -10;
-            }
-        }
-        if(isAnyDiagonalNotifyWinningSomeone()==true){
-            if(board[0].getText().equals(ai) || board[2].getText().equals(ai)){
-                return 10;
-            }else if(board[0].getText().equals(user) || board[2].getText().equals(user)){
-                return -10;
-            }
-        }
-        return 0;
-    }
+      
     
     
-    public int minMax(Button[]board , int depth , boolean isAi){
-    
-        int score = evaluateBoard(board);
-        if(score == 10 || score == -10 || score == 0){
-            return score;
-        }
-        else if(isBoardFull()==true){
-            return 0;
-        }
-        
-        if(isAi){
-            int bestScore = Integer.MIN_VALUE;
-            for(int i =0 ; i <9 ;i++){
-                if(board[i].getText().equals("")){
-                   board[i].setText(ai);
-                   bestScore = Math.max(bestScore, minMax(board, depth+1,false));
-                   board[i].setText("");
-                
-                }
-            
-            
-            }
-        return bestScore - depth;
-        }else{
-            int bestScore = Integer.MAX_VALUE;
-             for(int i =0 ; i <9 ;i++){
-                if(board[i].getText().equals("")){
-                   board[i].setText(user);
-                   bestScore = Math.max(bestScore, minMax(board, depth+1,true));
-                   board[i].setText("");
-                
-                }
-            }
-        return bestScore + depth;
-        
-        }
-    }
-    public Button findBestPlay(Button [] Board){
-        Button bestButton = new Button();
-        int bestScore = Integer.MIN_VALUE;
-        for(int i = 0 ; i<9 ; i++){
-            if(board[i].getText().equals("")){
-                board[i].setText(ai);
-                
-                int score = minMax(board , 0 , false);
-                board[i].setText("");
-                if(score>bestScore){
-                    bestButton = board[i];
-                    bestScore = score;
-                }
-            }     
-        }
-        return bestButton;
-    } 
-    
-    
-    public Button easyMode(){
-    int index;
-    Random random = new Random();
-    Button randomButton = new Button();
-    while(true){
-        index = random.nextInt(9);
-        if(board[index].getText().equals("")){
-            randomButton = board[index];
-            break;
-        }
-    }
-    return randomButton;
-    }
-    public Button mediumMode(){
-        if(board[0].getText().equals(board[1].getText()) && board[0].getText().equals(user)){
-            return board[2];
-        }else if(board[0].getText().equals(board[3].getText()) && board[0].getText().equals(user)){
-            return board[6];
-        }else if(board[3].getText().equals(board[4].getText()) && board[3].getText().equals(user)){
-            return board[5];
-        }else if(board[6].getText().equals(board[7].getText()) && board[7].getText().equals(user)){
-            return board[8];
-        }else if(board[1].getText().equals(board[4].getText()) && board[1].getText().equals(user)){
-            return board[7];
-        }else if(board[2].getText().equals(board[5].getText()) && board[2].getText().equals(user)){
-            return board[8];
-        }else if(board[0].getText().equals(board[4].getText()) && board[0].getText().equals(user)){
-            return board[8];
-        }else if(board[2].getText().equals(board[4].getText()) && board[2].getText().equals(user)){
-            return board[6];
-        }else{
-            Random random = new Random();
-            int index;
-            while(true){
-                 index = random.nextInt(9);
-                if(board[index].getText().equals("")){
-                    break;
-                }
-                
-            }
-            return board[index];
-        }
-        
-    
-    }
-    public Button hardMode(){
-        return findBestPlay(board);
-    }
+   
     
 
      public void intializeLabels(String titles, String playerxName, String playeroName)
@@ -560,4 +443,124 @@ public class BoardScrController implements Initializable {
         mediaPlayer.stop();
         videoPlayer.setVisible(false);
      }
-}
+     
+     
+     
+     
+    private Button easyMode(){
+        Random random = new Random();
+        int index = 0 ;
+        if(!isBoardFull() && !notifiyWining()&&!isBoardEmpty()){
+        do{
+        
+           index = random.nextInt(9);
+        
+        }while(!board[index].getText().equals(""));
+        }
+        return board[index];
+    }
+    
+     public void handleEasyModeOnPressed(ActionEvent e) {
+        if (currentStatus == GameStatus.PLAYING) {
+            targetedBtn = (Button) e.getSource();
+            if (targetedBtn.getText().equals("")) {
+                targetedBtn.setText(user);
+                    targetedBtn.setStyle("-fx-text-fill: #febd08;-fx-background-color: #1F3274; ");
+                    highlightTheLabel('o');
+                    numberOfClickedBoxes++;
+                    reviewTheBoard();
+                    if(!isBoardFull()&&!notifiyWining() && !isBoardEmpty()){
+                        aiBtn = easyMode();
+                        aiBtn.setText(ai);
+                        aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
+                        highlightTheLabel('x');
+                         numberOfClickedBoxes++;
+                            reviewTheBoard();
+                    }
+                }  
+            }
+        }
+     
+        private boolean isBoardEmpty(){
+            boolean flag = true;
+            for(int i = 0 ; i<board.length ; i++){
+                if(board[i].getText().equals(ai)||board[i].getText().equals(user)){
+                        flag = false;
+                }
+            
+            }
+            return false;
+        }
+     
+        private boolean isUserWillWin(Button b1 , Button b2 , Button b3){
+              boolean flag = false;
+              if(b1.getText().equals(b2.getText())&&b1.getText().equals(user) && b3.getText().equals("")){
+                  flag = true;
+              }else if(b2.getText().equals(b3.getText())&&b2.getText().equals(user)&& b1.getText().equals("")){
+                  flag = true;
+              }else if(b1.getText().equals(b3.getText())&&b1.getText().equals(user)&& b2.getText().equals("")){
+                    flag = true;
+              }
+              return flag;
+        }
+        
+        private Button preventUserWining(Button b1 , Button b2 , Button b3){
+            Button temp = new Button();
+            if(b1.getText().equals(b2.getText()) && b3.getText().equals("")){
+                 temp = b3;
+              }else if(b2.getText().equals(b3.getText())&& b1.getText().equals("")){
+                  temp = b1;
+              }else if(b1.getText().equals(b3.getText())&& b2.getText().equals("")){
+                    temp = b2;
+              }
+              return temp;
+            
+        }
+          
+        private Button mediumMode(){
+            Button medium = new Button();
+            if(isUserWillWin(board[0], board[1], board[2])){
+                medium = preventUserWining(board[0], board[1], board[2]);
+            }else if(isUserWillWin(board[3], board[4], board[5])){
+                medium = preventUserWining(board[3], board[4], board[5]);
+            }else if (isUserWillWin(board[6], board[7], board[8])){
+                medium = preventUserWining(board[6], board[7], board[8]);
+            }else if (isUserWillWin(board[0], board[3], board[6])){
+                medium = preventUserWining(board[0], board[3], board[6]);
+            }else if (isUserWillWin(board[1], board[1], board[7])){
+                medium = preventUserWining(board[1], board[1], board[7]);
+            }else if (isUserWillWin(board[2], board[5], board[8])){
+                medium = preventUserWining(board[2], board[5], board[8]);
+            }else if(isUserWillWin(board[0], board[4], board[8])){
+                medium = preventUserWining(board[0], board[4], board[8]);
+            }else if (isUserWillWin(board[2], board[4], board[6])){
+                    medium = preventUserWining(board[2], board[4], board[6]);
+            }else{
+                medium = easyMode();
+            }
+            return medium;
+        }
+        
+        public void handleMediumModeOnPressed(ActionEvent e) {
+        if (currentStatus == GameStatus.PLAYING) {
+            targetedBtn = (Button) e.getSource();
+            if (targetedBtn.getText().equals("")) {
+                targetedBtn.setText(user);
+                    targetedBtn.setStyle("-fx-text-fill: #febd08;-fx-background-color: #1F3274; ");
+                    highlightTheLabel('o');
+                    numberOfClickedBoxes++;
+                    reviewTheBoard();
+                         if(!isBoardFull()&&!notifiyWining() && !isBoardEmpty()){
+                        aiBtn = mediumMode();
+                        aiBtn.setText(ai);
+                        aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
+                        highlightTheLabel('x');
+                         numberOfClickedBoxes++;
+                            reviewTheBoard();
+                         }
+                }  
+            }
+        }
+     
+     
+    }
