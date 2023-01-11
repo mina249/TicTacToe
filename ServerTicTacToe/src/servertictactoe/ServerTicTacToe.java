@@ -9,10 +9,6 @@ import javafx.stage.Stage;
 
 public class ServerTicTacToe extends Application {
 
-// Database Url is:  "jdbc:derby://localhost:1527/serverdatabase"
-// Database Driver Class is: "org.apache.derby.jdbc.ClientDriver"    
-// User is "root"
-// Password is "root"
     @Override
     public void start(Stage stage) throws Exception {
         
