@@ -17,7 +17,11 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import static servertictactoe.Database.onlinePlayerList;
 import static servertictactoe.Database.serverPlayerList;
+import static sun.audio.AudioPlayer.player;
 
 /**
  *
@@ -33,18 +37,7 @@ public class PlayerHandler extends Thread {
     private String status;
     private int totalScore;
     private int numPlayedGames;
- static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
-   
- public void refreshServerList()
- {
-     Platform.runLater(() -> {
-         try {
-             serverPlayerList();
-         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-             Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
-         }
-     });
- }
+ static Vector<PlayerHandler> players = new Vector<PlayerHandler>();   
  
  public PlayerHandler(Socket cs)
 {
@@ -80,6 +73,13 @@ while(true)
         } } catch (IOException ex) {
         Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
+    try {
+        String str = getOnlinePlayers();
+        System.out.println(str);
+        
+    } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
 
 }
@@ -94,9 +94,21 @@ while(true)
      
      }
      
+     
+     
  }
 
- 
+ private String getOnlinePlayers() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+     String allOnlinePlayers = "onlinePlayers";
+     ObservableList<Player> onlinePlayers = FXCollections.observableArrayList();
+     onlinePlayers = onlinePlayerList();
+     
+     for(Player p: onlinePlayers)
+     {
+         allOnlinePlayers+=p;
+     }
+     return allOnlinePlayers;
+ }
  
     
 }

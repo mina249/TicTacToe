@@ -24,7 +24,7 @@ public class Database {
     public static ObservableList<Player> serverPlayerList() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ObservableList<Player> players = FXCollections.observableArrayList();
         Statement stmt = con.createStatement();
-        String queryString = "select * from Player where status != 'Offline' order by status desc";
+        String queryString = "select * from Player where status not in ('Offline', 'offline') order by status desc";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
            String name = rs.getString(2);
