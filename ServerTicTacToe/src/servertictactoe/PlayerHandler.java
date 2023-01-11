@@ -73,17 +73,8 @@ while(true)
         } } catch (IOException ex) {
         Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
-    try {
-        String str = getOnlinePlayers();
-        System.out.println(str);
-        
-    } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-        Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
-    }
 }
-
 }
- 
  
  private void sendRequest(String sender , String reciever){
      for(int i = 0 ; i< players.size();i++){
@@ -91,24 +82,6 @@ while(true)
          
              players.get(i).ps.println("request;"+sender+reciever);
          }
-     
-     }
-     
-     
-     
- }
-
- private String getOnlinePlayers() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-     String allOnlinePlayers = "onlinePlayers";
-     ObservableList<Player> onlinePlayers = FXCollections.observableArrayList();
-     onlinePlayers = onlinePlayerList();
-     
-     for(Player p: onlinePlayers)
-     {
-         allOnlinePlayers+=p;
-     }
-     return allOnlinePlayers;
- }
- 
-    
+     }  
+ }   
 }

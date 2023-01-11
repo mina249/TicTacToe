@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.shape.Circle;
 import static servertictactoe.Database.dbConnect;
+import static servertictactoe.Database.onlinePlayerList;
 import static servertictactoe.Database.serverPlayerList;
 
 
