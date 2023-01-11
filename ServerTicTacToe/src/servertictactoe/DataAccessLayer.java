@@ -24,9 +24,9 @@ public class DataAccessLayer {
         DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
         Connection con= DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe","root","root");
         PreparedStatement ps= con.prepareStatement("INSERT INTO PLAYER (EMAIL,USERNAME,PASSWORD) VALUES (?,?,?)");
-        ps.setString(0, mail);
-        ps.setString(1, name);
-        ps.setString(2, password);
+        ps.setString(1, mail);
+        ps.setString(2, name);
+        ps.setString(3, password);
         result= ps.executeUpdate();
         con.commit();
         ps.close();
@@ -40,14 +40,16 @@ public class DataAccessLayer {
         DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
         Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe","root","root");
         PreparedStatement ps = con.prepareStatement("SELECT * FROM Contacts WHERE( USERNAME= ? and PASSWORD= ?) ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        ps.setString(1, name);
+        ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
          rs.close();
          
         if (rs.next())
         {
             ps= con.prepareStatement("UPDATE PLAYER set STATUS=? where USERNAME=?");
-            ps.setString(0, "online");
-            ps.setString(1, name);
+            ps.setString(1, "online");
+            ps.setString(2, name);
             result=1;
         }
         con.commit();

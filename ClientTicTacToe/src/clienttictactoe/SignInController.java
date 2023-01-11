@@ -42,13 +42,14 @@ public class SignInController implements Initializable {
     private Button btn_SiginIn;
     @FXML
     private Button btn_SiginUp;
-
+    Thread th;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     @FXML
     public void handleSignupButtonAction(ActionEvent event) throws Exception{
@@ -70,12 +71,13 @@ public class SignInController implements Initializable {
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
         try {
+            
              Socket mysocket;
             DataInputStream ear;
             PrintStream mouth;
             String msg;
             String reply;
-            mysocket= new Socket("127.0.0.1",2611);
+            mysocket= new Socket("127.0.0.1",5009);
             mouth= new PrintStream(mysocket.getOutputStream());
             msg= "login" + ";" + tf_UserName.getText() + ";" + tf_Password.getText();
             mouth.println(msg);

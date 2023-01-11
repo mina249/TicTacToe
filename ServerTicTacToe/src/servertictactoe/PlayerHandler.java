@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -29,13 +30,14 @@ public class PlayerHandler extends Thread {
  private String email;
  private String status;
  static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
+ Socket socket;
  
  public PlayerHandler(Socket cs)
 {
      try {
          dis = new DataInputStream(cs.getInputStream());
          ps = new PrintStream(cs.getOutputStream());
-         PlayerHandler.players.add(this);
+        socket = cs;
          start();
      } catch (IOException ex) {
         ex.printStackTrace();
@@ -47,8 +49,9 @@ public class PlayerHandler extends Thread {
 while(true)
 {
     try {
-        String completeMsg = dis.readUTF();
-        StringTokenizer tokenizer = new StringTokenizer("completeMsg",";");
+        String completeMsg = dis.readLine();
+        System.out.println(completeMsg);
+        StringTokenizer tokenizer = new StringTokenizer(completeMsg,";");
         
         String header = tokenizer.nextToken();
         switch (header){
@@ -56,8 +59,51 @@ while(true)
                 
                 break;
             case "login":
+               String nameL= tokenizer.nextToken();
+               String pswL= tokenizer.nextToken();
+               int result;
+        try {
+            result = DataAccessLayer.logIn(nameL, pswL);
+             if (result==1)
+                {
+                    userName= nameL;
+                    passWord= pswL;
+                    players.add(this);
+                    ps.println("1;" + userName);
+                }
+                else
+                {
+                    ps.println("0");
+                    socket.close();
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
                 break;
             case "signup":
+                String mail= tokenizer.nextToken();
+                String nameS= tokenizer.nextToken();
+               String pswS= tokenizer.nextToken();
+               int resultS = 0;
+        try {
+            resultS = DataAccessLayer.signUp(mail, nameS, pswS);
+             if (resultS==1)
+                {
+                    ps.println("1");
+                    socket.close();
+                    
+                }
+                else
+                {
+                    ps.println("0");
+                    socket.close();
+                }
+               
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
                 break;
             default:
                 break;

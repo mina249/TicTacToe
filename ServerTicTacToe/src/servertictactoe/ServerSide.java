@@ -24,20 +24,33 @@ import java.util.logging.Logger;
 public class ServerSide {
     
     ServerSocket serverSocket;
+    Thread thread;
 
     public ServerSide() {
         try {
             serverSocket = new ServerSocket(5009);
+        } catch (IOException ex) {
+            Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        thread = new Thread(()->{
             while(true){
+        try {
+            
+            
                 Socket clientSocket = serverSocket.accept();
                 new PlayerHandler(clientSocket);
                 
             }
-        } catch (IOException ex) {
+        catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
         }
+            }
+    });
         
+        thread.start();
     }
+    public static void main(String [] args) {
+        new ServerSide();
     
-    
-}
+    }
+} 
