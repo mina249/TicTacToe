@@ -5,6 +5,9 @@
  */
 package clienttictactoe;
 
+import java.io.DataInputStream;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -46,11 +49,28 @@ public class SignUpController implements Initializable {
     }  
     @FXML
     public void handleSignupButtonAction(ActionEvent event) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("OnlinePlayerList.fxml"));
+        Socket mysocket;
+        DataInputStream ear;
+        PrintStream mouth;
+        String msg;
+        String reply;
+        mysocket= new Socket("127.0.0.1",2611);
+        mouth= new PrintStream(mysocket.getOutputStream());
+        msg= "signup" + ";" + tf_UserNmae.getText() + ";" +  tf_Email.getText() + ";" + tf_Password.getText();
+        mouth.println(msg);
+        ear= new DataInputStream(mysocket.getInputStream());
+        reply= ear.readLine();
+        if(reply.equals("0"))
+        {
+            tf_UserNmae.setText("User name already exists, please write a new one");
+            tf_UserNmae.setStyle("-fx-text-fill red");
+        }else {
+        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+        }
     }
     @FXML
      public void handlBackButtonAction(ActionEvent event) throws Exception{
