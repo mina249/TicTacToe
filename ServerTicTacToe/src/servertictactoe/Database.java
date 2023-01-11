@@ -36,6 +36,19 @@ public class Database {
            players.add(p);
         }  
         return players;
-    }    
+    }
+    
+    public static ObservableList<Player> onlinePlayerList() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ObservableList<Player> players = FXCollections.observableArrayList();
+        Statement stmt = con.createStatement();
+        String queryString = "select * from Player where status in ('Online', 'online')";
+        ResultSet rs = stmt.executeQuery(queryString);
+        while (rs.next()) {
+           String name = rs.getString(2);
+           Player p = new Player(name);
+           players.add(p);
+        }  
+        return players;
+    }  
    
 }

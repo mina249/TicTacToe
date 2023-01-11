@@ -20,6 +20,10 @@ public class Player {
     public Player() {
     }
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public Player(String name, String status, int totalScore, int numPlayedGames) {
         this.name = name;
         this.status = status;
