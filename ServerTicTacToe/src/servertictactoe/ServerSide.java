@@ -27,9 +27,9 @@ public class ServerSide {
     Thread thread;
 
     public ServerSide() {
-       
+/*       
         thread = new Thread(()->{
->>
+
             while(true){
         try {
             
@@ -44,9 +44,10 @@ public class ServerSide {
 
          });
          thread.start();
+*/
     }
     public static void main(String [] args){
-            new ServerSide();
+/*            new ServerSide();
     }
             
 
@@ -57,6 +58,6 @@ public class ServerSide {
     }
     public static void main(String [] args) {
         new ServerSide();
-
+*/
     }
 } 

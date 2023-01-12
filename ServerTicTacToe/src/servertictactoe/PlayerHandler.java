@@ -17,12 +17,6 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import static servertictactoe.Database.onlinePlayerList;
-import static servertictactoe.Database.serverPlayerList;
-import static sun.audio.AudioPlayer.player;
 
 /**
  *
@@ -38,16 +32,7 @@ public class PlayerHandler extends Thread {
  private String status;
  Socket socket;
  static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
- Socket socket;
- PrintStream ps;  
-    private String username;
-    private String email;
-    private String password;
-    private String status;
-    private int totalScore;
-    private int numPlayedGames;
- static Vector<PlayerHandler> players = new Vector<PlayerHandler>();   
- 
+
  public PlayerHandler(Socket cs)
 {
      try {
@@ -149,7 +134,7 @@ while(true)
  
  private void sendRequest(String sender , String reciever){
      for(int i = 0 ; i< players.size();i++){
-         if(players.get(i).username.equals(reciever) && players.get(i).status.equals("online")){
+         if(players.get(i).userName.equals(reciever) && players.get(i).status.equals("online")){
          
              players.get(i).ps.println("request;"+sender+reciever);
          }
