@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,22 +30,26 @@ public class PlayerHandler extends Thread {
  private String passWord;
  private String email;
  private String status;
- static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
  Socket socket;
- 
+ static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
+
  public PlayerHandler(Socket cs)
 {
      try {
          dis = new DataInputStream(cs.getInputStream());
          ps = new PrintStream(cs.getOutputStream());
+
+ 
+
         socket = cs;
+
          start();
      } catch (IOException ex) {
         ex.printStackTrace();
      }
 }
  
- public void run()
+public void run()
 {
 while(true)
 {
@@ -59,6 +64,19 @@ while(true)
                 
                 break;
             case "login":
+
+                players.add(this);
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
                String nameL= tokenizer.nextToken();
                String pswL= tokenizer.nextToken();
                int result;
@@ -80,6 +98,7 @@ while(true)
             Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
                
+
                 break;
             case "signup":
                 String mail= tokenizer.nextToken();
@@ -111,9 +130,7 @@ while(true)
         Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-
 }
- 
  
  private void sendRequest(String sender , String reciever){
      for(int i = 0 ; i< players.size();i++){
@@ -121,12 +138,6 @@ while(true)
          
              players.get(i).ps.println("request;"+sender+reciever);
          }
-     
-     }
-     
- }
-
- 
- 
-    
+     }  
+ }   
 }
