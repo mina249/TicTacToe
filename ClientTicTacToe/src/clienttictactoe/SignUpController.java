@@ -65,7 +65,7 @@ public class SignUpController implements Initializable {
     public void handleSignupButtonAction(ActionEvent event) throws Exception{
        th = new Thread(()-> {
            try {
-                msg= "signup" + ";" + tf_UserNmae.getText() + ";" +  tf_Email.getText() + ";" + tf_Password.getText();
+                msg= "signup" + ";" + tf_Email.getText() + ";" + tf_UserNmae.getText() + ";" + tf_Password.getText();
                
                 mouth.println(msg);
                 

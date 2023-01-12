@@ -50,13 +50,48 @@ public class DataAccessLayer {
             ps= con.prepareStatement("UPDATE PLAYER set STATUS=? where USERNAME=?");
             ps.setString(1, "online");
             ps.setString(2, name);
-            result=1;
         }
+        result= ps.executeUpdate();
         con.commit();
         ps.close();
         con.close();
         return result;
     }
     
+    public static int logout(String name) throws SQLException
+    {
+        int result=0;
+        DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe","root","root");
+        PreparedStatement ps = con.prepareStatement("UPDATE PLAYER set STATUS=? where USERNAME=?");
+        ps.setString(1, "offline");
+        ps.setString(2, name);
+        result= ps.executeUpdate();
+        con.commit();
+        ps.close();
+        con.close();
+        return result;
+    }
+    
+    public static int connectedSuccessfuly(String player1, String player2) throws SQLException
+    {
+        int result=0;
+        DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/TicTacToe","root","root");
+        PreparedStatement ps = con.prepareStatement("UPDATE PLAYER set STATUS=? where USERNAME=?");
+        ps.setString(1, "playing");
+        ps.setString(2, player1);
+        result= ps.executeUpdate();
+        
+        ps.setString(1, "playing");
+        ps.setString(2, player2);
+        ps.executeUpdate();
+        con.commit();
+        ps.close();
+        con.close();  
+        return result;
+      
+  
+    }
 }
 
