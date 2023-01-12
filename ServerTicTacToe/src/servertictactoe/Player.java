@@ -24,19 +24,13 @@ public class Player {
         this.name = name;
     }
 
-    public Player(String name, String status, int totalScore, int numPlayedGames) {
+    public Player(String name, String status) {
         this.name = name;
         this.status = status;
-        this.totalScore = totalScore;
-        this.numPlayedGames = numPlayedGames;
     }
 
-    // All
-    public Player(int id, String name, String email, String password, String status, int totalScore, int numPlayedGames) {
-        this.id = id;
+    public Player(String name, String status, int totalScore, int numPlayedGames) {
         this.name = name;
-        this.email = email;
-        this.password = password;
         this.status = status;
         this.totalScore = totalScore;
         this.numPlayedGames = numPlayedGames;

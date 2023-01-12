@@ -25,15 +25,13 @@ public class Database {
     public static ObservableList<Player> serverPlayerList() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ObservableList<Player> players = FXCollections.observableArrayList();
         Statement stmt = con.createStatement();
-        String queryString = "select * from Player where status not in ('Offline', 'offline') order by status desc";
+        String queryString = "select * from Player order by status desc";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
-            String name = rs.getString(2);
-            String status = rs.getString(5);
-            int totalScore = rs.getInt(6);
-            int numPlayedGames = rs.getInt(7);
+            String name = rs.getString(1);
+            String status = rs.getString(4);
 
-            Player p = new Player(name, status, totalScore, numPlayedGames);
+            Player p = new Player(name, status);
             players.add(p);
         }
         return players;
@@ -45,7 +43,7 @@ public class Database {
         String queryString = "select * from Player where status in ('Online', 'online')";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
-            String name = rs.getString(2);
+            String name = rs.getString(1);
             Player p = new Player(name);
             onlinePlayers += p.getName() + ";";
         }
