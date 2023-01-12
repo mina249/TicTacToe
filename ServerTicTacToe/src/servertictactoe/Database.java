@@ -13,8 +13,8 @@ public class Database {
     static String dbName = "serverdatabase";
     static String url = "jdbc:derby://localhost:1527/serverdatabase";   // Will it change between different laptops ?
     static String driver = "org.apache.derby.jdbc.ClientDriver";
-    static String username = "root";
-    static String password = "root";
+    static String username = "mina";
+    static String password = "mina";
  
     public static void dbConnect() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         Class.forName(driver).newInstance();
@@ -27,10 +27,10 @@ public class Database {
         String queryString = "select * from Player where status not in ('Offline', 'offline') order by status desc";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
-           String name = rs.getString(2);
-           String status = rs.getString(5);
-           int totalScore = rs.getInt(6);
-           int numPlayedGames = rs.getInt(7);
+           String name = rs.getString(1);
+           String status = rs.getString(4);
+           int totalScore = rs.getInt(5);
+           int numPlayedGames = rs.getInt(6);
      
            Player p = new Player(name, status, totalScore, numPlayedGames);
            players.add(p);
@@ -44,7 +44,7 @@ public class Database {
         String queryString = "select * from Player where status in ('Online', 'online')";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
-           String name = rs.getString(2);
+           String name = rs.getString(1);
            Player p = new Player(name);
            onlinePlayers += p.getName() + ";";
         }

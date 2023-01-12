@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -39,60 +42,85 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField tf_Email;
     @FXML
-    private TextField tf_Password;
+    private PasswordField tf_Password;
     @FXML
     private Button btn_SiginUp;
+    @FXML
+    private Label error_label;
+     
     Thread th;
-    Socket mysocket;
-                DataInputStream ear;
-                PrintStream mouth;
-                String msg;
-                String reply;
+    String msg;
+    String reply;
+    ClientSide cs;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            mysocket= new Socket("127.0.0.1",5009);
-            mouth= new PrintStream(mysocket.getOutputStream());
-            ear= new DataInputStream(mysocket.getInputStream());
-        } catch (IOException ex) {
-            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }  
-    @FXML
-    public void handleSignupButtonAction(ActionEvent event) throws Exception{
-       th = new Thread(()-> {
-           try {
-                msg= "signup" + ";" + tf_UserNmae.getText() + ";" +  tf_Email.getText() + ";" + tf_Password.getText();
-               
-                mouth.println(msg);
-                
-                reply= ear.readLine();
-                /*if(reply.equals("0"))
-                {
-                    tf_UserNmae.setText("User name already exists, please write a new one");
-                    tf_UserNmae.setStyle("-fx-text-fill red");
-                }else {*/
-                    Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(scene);
-                    stage.show();
-                }  catch (IOException ex) {
-                Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    });
-       th.start();
+        cs = new ClientSide();
     }
+
     @FXML
-     public void handlBackButtonAction(ActionEvent event) throws Exception{
+    public void handleSignupButtonAction(ActionEvent event) throws Exception {
+
+        if (tf_Email.getText().isEmpty() || tf_UserNmae.getText().isEmpty() || tf_Password.getText().isEmpty()) {
+                     error_label.setText("Please fill the empty feilds");
+        } else {
+
+            th = new Thread(() -> {
+                try {
+                    msg = "signup" + ";" + tf_Email.getText() + ";" + tf_UserNmae.getText() + ";" + tf_Password.getText();
+                    cs.ps.println(msg);
+                    reply = cs.dis.readLine();
+                    if (reply.equals("0")) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                error_label.setText("This user name is already exist, try another one");
+
+                            }
+
+                        });
+                    } else {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                                    Scene scene = new Scene(root);
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                            }
+                        });
+
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+
+            th.start();
+        }
+    }
+
+    @FXML
+    public void handlBackButtonAction(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
-   
+
+    public void init() {
+
+    }
+
 }
