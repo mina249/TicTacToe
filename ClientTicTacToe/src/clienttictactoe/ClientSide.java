@@ -23,7 +23,7 @@ public class ClientSide {
     
     public ClientSide(){
         try {
-            socket = new Socket("127.1.1.0",5009);
+            socket = new Socket("127.0.0.1",5009);
             dis = new DataInputStream(socket.getInputStream ());
             ps = new PrintStream(socket.getOutputStream ());
         } catch (IOException ex) {

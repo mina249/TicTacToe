@@ -124,6 +124,12 @@ while(true)
         }
                
                 break;
+            case "move":    String opponentName= tokenizer.nextToken();
+                            System.out.println("opponent name:"+opponentName);
+                            String msgContent= tokenizer.nextToken();
+                            System.out.println("opponent name:"+msgContent);
+                            moveHandling(opponentName,msgContent);
+                            break;
             default:
                 break;
         } } catch (IOException ex) {
@@ -139,5 +145,12 @@ while(true)
              players.get(i).ps.println("request;"+sender+reciever);
          }
      }  
- }   
+ } 
+  private void moveHandling(String opponentName,String moveContent){
+     for(int i = 0 ; i< players.size();i++){
+         if(players.get(i).userName.equals(opponentName) && players.get(i).status.equals("PLAYING")){
+             players.get(i).ps.println(moveContent);
+         }
+     }  
+ } 
 }
