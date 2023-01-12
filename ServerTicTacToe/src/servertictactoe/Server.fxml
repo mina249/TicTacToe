@@ -27,12 +27,10 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </Button>
-      <TableView fx:id="tableView">
+      <TableView fx:id="tableView" style="-fx-background-color: #5A5A5A;">
         <columns>
-          <TableColumn fx:id="tableColumnName" editable="false" prefWidth="170.0" resizable="false" sortType="DESCENDING" text="Name" />
-          <TableColumn fx:id="tableColumnStatus" editable="false" prefWidth="100.0" resizable="false" sortType="DESCENDING" text="Status" />
-            <TableColumn fx:id="tableColumnScore" editable="false" prefWidth="100.0" resizable="false" sortType="DESCENDING" text="Score" />
-            <TableColumn fx:id="tableColumnNumGames" editable="false" prefWidth="100.0" resizable="false" sortType="DESCENDING" text="Finished Games" />
+          <TableColumn fx:id="tableColumnName" editable="false" prefWidth="287.0" resizable="false" sortType="DESCENDING" text="Name" />
+          <TableColumn fx:id="tableColumnStatus" editable="false" prefWidth="116.0" resizable="false" sortType="DESCENDING" text="Status" />
         </columns>
       </TableView>
       <Circle fill="RED" radius="10.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1">
