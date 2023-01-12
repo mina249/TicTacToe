@@ -38,7 +38,8 @@ public class ClientSide {
         
         thread = new Thread(()->{
         try {
-           
+            
+            socket = new Socket("127.0.0.1",5009);
             dis = new DataInputStream(socket.getInputStream ());
             ps = new PrintStream(socket.getOutputStream ());
         } catch (IOException ex) {

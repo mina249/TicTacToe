@@ -58,8 +58,11 @@ public class SignUpController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         cs = new ClientSide();
-    }
+
+    }  
+  
 
     @FXML
     public void handleSignupButtonAction(ActionEvent event) throws Exception {

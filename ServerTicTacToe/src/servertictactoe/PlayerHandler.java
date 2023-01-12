@@ -15,17 +15,21 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import static servertictactoe.Database.serverPlayerList;
 import static sun.audio.AudioPlayer.player;
+=======
+>>>>>>> c15f59b53ca58ae0617dc2d0b9c1f899185370b8
 
 /**
  *
  * @author ميناناجحعبدالمسيحزكى
  */
 public class PlayerHandler extends Thread {
+
 
     DataInputStream dis;
     PrintStream ps;
@@ -49,7 +53,10 @@ public class PlayerHandler extends Thread {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
+
+               
+
+
 
     public void run() {
         while (true) {
@@ -105,6 +112,12 @@ public class PlayerHandler extends Thread {
                         }
 
                         break;
+                    case "move":    String opponentName= tokenizer.nextToken();
+                        System.out.println("opponent name:"+opponentName);
+                        String msgContent= tokenizer.nextToken();
+                        System.out.println("opponent name:"+msgContent);
+                        moveHandling(opponentName,msgContent);
+                        break;
                     default:
                         break;
                 }
@@ -121,5 +134,16 @@ public class PlayerHandler extends Thread {
              players.get(i).ps.println("request;"+sender+reciever);
          }
      }  
- }  */
+
+}*/
+
+ } 
+  private void moveHandling(String opponentName,String moveContent){
+     for(int i = 0 ; i< players.size();i++){
+         if(players.get(i).userName.equals(opponentName) && players.get(i).status.equals("PLAYING")){
+             players.get(i).ps.println(moveContent);
+         }
+     }  
+ } 
 }
+

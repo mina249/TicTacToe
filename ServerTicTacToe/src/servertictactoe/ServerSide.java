@@ -27,9 +27,15 @@ public class ServerSide {
     Thread thread;
 
     public ServerSide() {
-       
+
+        serverSocket = new ServerSocket(9050);
+
+        thread = new Thread(()->{
+
+            while(true){
+
         try {
-            serverSocket = new ServerSocket(9050);
+
             thread = new Thread(() -> {
                 while(true){
                     try {
@@ -46,11 +52,13 @@ public class ServerSide {
         } catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     
        }
+
     public static void main(String [] args){
-         
+
     }
             
-  
-} 
+
+   
