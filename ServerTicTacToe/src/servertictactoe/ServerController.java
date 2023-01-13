@@ -53,7 +53,7 @@ public class ServerController implements Initializable {
             tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
             tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
             tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
-            
+               new ServerSide();
     }
     
     public void serverOnOff()

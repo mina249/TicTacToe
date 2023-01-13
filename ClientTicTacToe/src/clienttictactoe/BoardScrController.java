@@ -1,4 +1,4 @@
- package clienttictactoe;
+package clienttictactoe;
 
 import java.io.File;
 import java.io.IOException;
