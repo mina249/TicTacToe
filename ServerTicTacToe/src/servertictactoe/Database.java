@@ -38,17 +38,6 @@ public class Database {
         return players;
     }
     
-    public static String readyingStringforOnlineList() throws SQLException {
-        Statement stmt = con.createStatement();
-        String onlinePlayers = "onlinePlayers;";
-        String queryString = "select * from Player where status in ('Online', 'online')";
-        ResultSet rs = stmt.executeQuery(queryString);
-        while (rs.next()) {
-           String name = rs.getString(1);
-           Player p = new Player(name);
-           onlinePlayers += p.getName() + ";";
-        }
-        return onlinePlayers;
-    }  
+   
    
 }

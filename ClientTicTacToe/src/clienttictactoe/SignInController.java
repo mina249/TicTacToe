@@ -62,7 +62,7 @@ public class SignInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cs = new ClientSide();
+          cs = new ClientSide();
 
     }
 
@@ -86,7 +86,7 @@ public class SignInController implements Initializable {
 
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
-
+          
         if (tf_UserName.getText().isEmpty() || tx_pass.getText().isEmpty()) {
             error_label.setText("Please fill the empty feilds");
         } else {
@@ -104,11 +104,11 @@ public class SignInController implements Initializable {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                error_label.setText("Wrong user Name or password try to signup");
-
+                                 error_label.setText("Wrong user Name or password try to signup");
                             }
 
                         });
+
                     } else {
                         Platform.runLater(new Runnable() {
                             @Override
