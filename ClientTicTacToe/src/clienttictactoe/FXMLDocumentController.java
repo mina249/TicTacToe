@@ -232,7 +232,6 @@ public class FXMLDocumentController implements Initializable {
                 targetedBtn.setText("" + textOfBtn);
                 reviewTheBoard();
             }
-
         }
     }
 
@@ -359,15 +358,33 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+//    public void handleWinningSomeOne() {
+//        if (currentStatus == GameStatus.WINFIRSTPLAYER) {
+//            firstPlayerScore += 10;
+//            highlightTheLabel('x');
+//        } else if (currentStatus == GameStatus.WINSECONDPLAYER) {
+//            secondPlayerScore += 10;
+//            highlightTheLabel('o');
+//        }
+//   //     playVideo();
+//    }
     public void handleWinningSomeOne() {
+        ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setTitle("Congratulation");
         if (currentStatus == GameStatus.WINFIRSTPLAYER) {
             firstPlayerScore += 10;
             highlightTheLabel('x');
+            a.setContentText("The player  " + senderRequistName + "wines the game");
         } else if (currentStatus == GameStatus.WINSECONDPLAYER) {
             secondPlayerScore += 10;
+            a.setContentText("The player  " + opponentName + "wines the game");
             highlightTheLabel('o');
         }
-   //     playVideo();
+    //    playVideo();
+        a.getDialogPane().getButtonTypes().add(ok);
+        a.showAndWait();
+        setStandrdStart();
     }
 
     public void handleNoOneWin() {

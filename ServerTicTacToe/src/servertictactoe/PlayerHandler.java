@@ -37,8 +37,8 @@ public class PlayerHandler extends Thread {
     private int totalScore;
     private int numPlayedGames;
     static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
- 
-        //Latest
+
+    //Latest
     public PlayerHandler(Socket cs) {
         try {
 
@@ -77,13 +77,13 @@ public class PlayerHandler extends Thread {
                                 ps.println("1;" + userName);
                                 players.add(this);
                             } else {
-                                
+
                                 socket.close();
                             }
                         } catch (SQLException ex) {
                             ps.println("0;" + nameL);
                         }
-                            System.out.println(result);
+                        System.out.println(result);
                         break;
                     case "signup":
                         String mail = tokenizer.nextToken();
@@ -106,20 +106,24 @@ public class PlayerHandler extends Thread {
                         }
 
                         break;
-                        
-                        case "logout":
-                        String nameLO= tokenizer.nextToken();
-                        int logoutResult=0;
-                        logoutResult= DataAccessLayer.logout(nameLO);
-                        if (logoutResult==1)
-                        {
+
+                    case "logout":
+                        String nameLO = tokenizer.nextToken();
+                        int logoutResult = 0;
+                        logoutResult = DataAccessLayer.logout(nameLO);
+                        if (logoutResult == 1) {
                             ps.println("1");
                             socket.close();
-                        }
-                        else
-                        {
+                        } else {
                             socket.close();
                         }
+                        break;
+                    case "move":
+                        String opponentName = tokenizer.nextToken();
+                        System.out.println("opponent name:" + opponentName);
+                        String msgContent = tokenizer.nextToken();
+                        System.out.println("opponent name:" + msgContent);
+                        moveHandling(opponentName, msgContent);
                         break;
                     default:
                         break;
@@ -127,17 +131,25 @@ public class PlayerHandler extends Thread {
             } catch (IOException ex) {
                 Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
-                ps.println("0");
+                Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    /*private void sendRequest(String sender , String reciever){
-     for(int i = 0 ; i< players.size();i++){
-         if(players.get(i).userName.equals(reciever) && players.get(i).status.equals("online")){
-         
-             players.get(i).ps.println("request;"+sender+reciever);
-         }
-     }  
- }  */
+    private void sendRequest(String sender, String reciever) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).userName.equals(reciever) && players.get(i).status.equals("online")) {
+
+                players.get(i).ps.println("request;" + sender + reciever);
+            }
+        }
+    }
+
+    private void moveHandling(String opponentName, String moveContent) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).userName.equals(opponentName) && players.get(i).status.equals("PLAYING")) {
+                players.get(i).ps.println(moveContent);
+            }
+        }
+    }
 }
