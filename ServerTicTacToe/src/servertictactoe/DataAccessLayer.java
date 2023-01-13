@@ -33,7 +33,7 @@ public class DataAccessLayer {
         ps.close();
         con.close();
         return result;
-    }
+}
     
     public static int logIn(String name, String password) throws SQLException
     {
@@ -94,7 +94,7 @@ public class DataAccessLayer {
     
     private static void connect() throws SQLException{
      DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
-      con = DriverManager.getConnection("jdbc:derby://localhost:1527/serverdatabase","mina","mina");
+      con = DriverManager.getConnection("jdbc:derby://localhost:1527/serverdatabase","root","root");
     }
     
 }

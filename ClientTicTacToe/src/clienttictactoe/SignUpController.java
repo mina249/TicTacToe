@@ -47,7 +47,7 @@ public class SignUpController implements Initializable {
     private Button btn_SiginUp;
     @FXML
     private Label error_label;
-     
+
     Thread th;
     String msg;
     String reply;
@@ -65,12 +65,11 @@ public class SignUpController implements Initializable {
     public void handleSignupButtonAction(ActionEvent event) throws Exception {
 
         if (tf_Email.getText().isEmpty() || tf_UserNmae.getText().isEmpty() || tf_Password.getText().isEmpty()) {
-                     error_label.setText("Please fill the empty feilds");
+            error_label.setText("Please fill the empty feilds");
         } else {
 
             th = new Thread(() -> {
                 try {
-                    while(true){
                     msg = "signup" + ";" + tf_Email.getText() + ";" + tf_UserNmae.getText() + ";" + tf_Password.getText();
                     cs.ps.println(msg);
                     reply = cs.dis.readLine();
@@ -101,11 +100,10 @@ public class SignUpController implements Initializable {
                         });
 
                     }
-                    }
+
                 } catch (IOException ex) {
                     Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             });
 
             th.start();
