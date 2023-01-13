@@ -31,7 +31,6 @@ import javafx.stage.Stage;
  * @author ميناناجحعبدالمسيحزكى
  */
 public class SignInController implements Initializable {
-
     @FXML
     private Button btn_Back;
     @FXML
@@ -43,12 +42,13 @@ public class SignInController implements Initializable {
     @FXML
     private Button btn_SiginUp;
     Thread th;
+    BoardScrController boardScr= new BoardScrController();
+    OnlinePlayerListController playerList= new OnlinePlayerListController();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         
     }    
     @FXML
@@ -70,6 +70,9 @@ public class SignInController implements Initializable {
 
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
+        String loggedUserName= tf_UserName.getText();
+        boardScr.getLoginName(loggedUserName);
+        playerList.getLoginName(loggedUserName);
         try {
             
              Socket mysocket;

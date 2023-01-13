@@ -20,6 +20,7 @@ public class OnlinePlayerListController implements Initializable {
     private Button buttonBack;
     @FXML
     private Button buttonRecord;
+    private String loggedUserName;
  /*
     @FXML
     private TableView<Player> tableView;
@@ -51,6 +52,11 @@ public class OnlinePlayerListController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    }
+    
+    public void getLoginName(String loggedUserName)
+    {
+        this.loggedUserName= loggedUserName;
     }
     
 }

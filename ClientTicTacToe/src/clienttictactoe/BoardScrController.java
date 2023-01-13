@@ -77,6 +77,7 @@ public class BoardScrController implements Initializable {
     private boolean justStarted = true;
     private Button [] board = new Button[9];
     private Button aiBtn;
+    private String loggedUserName;
     
 
     private enum GameStatus {
@@ -561,6 +562,9 @@ public class BoardScrController implements Initializable {
                 }  
             }
         }
-     
+     public void getLoginName(String loggedUserName)
+     {
+         this.loggedUserName= loggedUserName;
+     }
      
     }

@@ -64,19 +64,7 @@ while(true)
                 
                 break;
             case "login":
-
                 players.add(this);
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
                String nameL= tokenizer.nextToken();
                String pswL= tokenizer.nextToken();
                int result;
@@ -98,7 +86,6 @@ while(true)
             Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
                
-
                 break;
             case "signup":
                 String mail= tokenizer.nextToken();
@@ -124,9 +111,28 @@ while(true)
         }
                
                 break;
+                
+            case "logout":
+                String nameLO= tokenizer.nextToken();
+                int logoutResult=0;
+                logoutResult= DataAccessLayer.logout(nameLO);
+                if (logoutResult==1)
+                {
+                    ps.println("1");
+                    socket.close();
+                }
+                else
+                {
+                    ps.println("0");
+                    socket.close();
+                }
+                break;
+                
             default:
                 break;
         } } catch (IOException ex) {
+        Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
         Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
