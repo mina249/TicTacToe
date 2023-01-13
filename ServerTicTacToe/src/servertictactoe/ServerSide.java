@@ -45,12 +45,15 @@ public class ServerSide {
             thread.start();
         } catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
+        }    
        }
-    public static void main(String [] args){
-         
+    
+    public void closeSocket()
+    {
+        try {
+            serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-            
-  
 } 

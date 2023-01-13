@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.shape.Circle;
 import static servertictactoe.Database.dbConnect;
 import static servertictactoe.Database.serverPlayerList;
+import static servertictactoe.Database.setOffline;
+import static servertictactoe.Database.setOnline;
 
 
 public class ServerController implements Initializable {
@@ -34,14 +37,13 @@ public class ServerController implements Initializable {
     private TableColumn<Player, Integer> tableColumnNumGames;
     @FXML
     private Circle circleGreen;
+    ObservableList playersList;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-            ObservableList playersList;
         try {
             dbConnect();
             playersList = serverPlayerList();
@@ -53,7 +55,7 @@ public class ServerController implements Initializable {
             tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
             tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
             tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
-               new ServerSide();
+            new ServerSide();
     }
     
     public void serverOnOff()
@@ -62,22 +64,57 @@ public class ServerController implements Initializable {
         {
             serverOnOffButton.setText("Server Off");
             circleGreen.setVisible(false);
+
+            onRefresh2();
         }
         else
         {
+            
+            onRefresh();
             serverOnOffButton.setText("Server On");
-            circleGreen.setVisible(true);
-            //ServerSide serverSide = new ServerSide();
-
-/*           
-         Platform.runLater(() -> {
-                try {
-                    serverPlayerList();
-                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-                    Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
-                }      
-            });
-*/            
+            circleGreen.setVisible(true);            
+            tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
         }
+    }
+    
+    private void onRefresh()
+    {      
+            playersList.addListener(new ListChangeListener<Player>(){
+                @Override
+                public void onChanged(javafx.collections.ListChangeListener.Change<? extends Player> pChange) {
+                    while(pChange.next()) {
+                        setOffline();
+                                    tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
+            tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+                        try {
+                            serverPlayerList();
+                        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                            Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            });
+    }
+    
+    private void onRefresh2()
+    {      
+            playersList.addListener(new ListChangeListener<Player>(){
+                @Override
+                public void onChanged(javafx.collections.ListChangeListener.Change<? extends Player> pChange) {
+                    while(pChange.next()) {
+                        setOnline();  
+                                    tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
+            tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+                        try {
+                            serverPlayerList();
+                        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                            Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            });
     }
 }
