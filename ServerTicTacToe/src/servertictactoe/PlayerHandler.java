@@ -10,7 +10,9 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import static servertictactoe.Database.con;
 import static servertictactoe.Database.serverPlayerList;
 import static sun.audio.AudioPlayer.player;
 
@@ -53,6 +56,14 @@ public class PlayerHandler extends Thread {
     }
 
     public void run() {
+         String onlinePlayers;
+        try {
+            onlinePlayers = readyingStringforOnlineList();
+             ps.println(onlinePlayers);
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
         while (true) {
             try {
                 String completeMsg = dis.readLine();
@@ -77,13 +88,17 @@ public class PlayerHandler extends Thread {
                                 ps.println("1;" + userName);
                                 players.add(this);
                             } else {
-
-                                socket.close();
+                                 ps.println("0;" + nameL);
+                              
+                               
                             }
                         } catch (SQLException ex) {
-                            ps.println("0;" + nameL);
+                              socket.close();
+                           ex.printStackTrace();
                         }
-                        System.out.println(result);
+                            System.out.println(result);
+                    
+                        
                         break;
                     case "signup":
                         String mail = tokenizer.nextToken();
@@ -123,6 +138,10 @@ public class PlayerHandler extends Thread {
                         System.out.println("opponent name:" + msgContent);
                         moveHandling(opponentName, msgContent);
                         break;
+                    /*case "onlinePlayers":
+                        String onlinePlayers = readyingStringforOnlineList();
+                        ps.println(onlinePlayers);*/
+                        
                     default:
                         break;
                 }
@@ -131,7 +150,11 @@ public class PlayerHandler extends Thread {
             } catch (SQLException ex) {
                 Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
         }
+      
+        
     }
 
     private void sendRequest(String sender, String reciever) {
@@ -150,4 +173,17 @@ public class PlayerHandler extends Thread {
             }
         }
     }
+    
+     public static String readyingStringforOnlineList() throws SQLException {
+        Statement stmt = con.createStatement();
+        String onlinePlayers = "onlinePlayers;";
+        String queryString = "select * from Player where status in ('Online', 'online')";
+        ResultSet rs = stmt.executeQuery(queryString);
+        while (rs.next()) {
+           String name = rs.getString(1);
+           Player p = new Player(name);
+           onlinePlayers += p.getName() + ";";
+        }
+        return onlinePlayers;
+    }  
 }
