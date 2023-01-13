@@ -15,14 +15,12 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import static servertictactoe.Database.serverPlayerList;
 import static sun.audio.AudioPlayer.player;
-=======
->>>>>>> c15f59b53ca58ae0617dc2d0b9c1f899185370b8
+
 
 /**
  *
@@ -53,10 +51,7 @@ public class PlayerHandler extends Thread {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-               
-
-
+    }
 
     public void run() {
         while (true) {
@@ -137,7 +132,6 @@ public class PlayerHandler extends Thread {
 
 }*/
 
- } 
   private void moveHandling(String opponentName,String moveContent){
      for(int i = 0 ; i< players.size();i++){
          if(players.get(i).userName.equals(opponentName) && players.get(i).status.equals("PLAYING")){

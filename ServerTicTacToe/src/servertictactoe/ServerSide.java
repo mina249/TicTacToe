@@ -26,7 +26,7 @@ public class ServerSide {
     ServerSocket serverSocket;
     Thread thread;
 
-    public ServerSide() {
+    public ServerSide() throws IOException {
 
         serverSocket = new ServerSocket(9050);
 
@@ -34,31 +34,27 @@ public class ServerSide {
 
             while(true){
 
-        try {
-
-            thread = new Thread(() -> {
-                while(true){
-                    try {
-                        Socket clientSocket = serverSocket.accept();
-                        new PlayerHandler(clientSocket);
-                        
+                thread = new Thread(() -> {
+                    while(true){
+                        try {
+                            Socket clientSocket = serverSocket.accept();
+                            new PlayerHandler(clientSocket);
+                            
+                        }
+                        catch (IOException ex) {
+                            Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                    catch (IOException ex) {
-                        Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            thread.start();
-        } catch (IOException ex) {
-            Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    
+                });
+                thread.start();  
        }
+            });
+    }
 
     public static void main(String [] args){
 
     }
+}
             
 
    

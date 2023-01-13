@@ -43,8 +43,7 @@ public class Database {
             String status = rs.getString(4);
 
             Player p = new Player(name, status);
-            players.add(p);
-        }
+            players.add(p);       
 
         return players;
     }
@@ -59,11 +58,6 @@ public class Database {
            String name = rs.getString(1);
            Player p = new Player(name);
            onlinePlayers += p.getName() + ";";
-
-            String name = rs.getString(1);
-            Player p = new Player(name);
-            onlinePlayers += p.getName() + ";";
-
         }
         return onlinePlayers;
     }

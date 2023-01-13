@@ -1,5 +1,6 @@
 package servertictactoe;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,7 +60,11 @@ public class ServerController implements Initializable {
             tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
             tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
             tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        try {
             new ServerSide();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     
