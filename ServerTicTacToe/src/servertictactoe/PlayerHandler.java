@@ -105,8 +105,6 @@ public class PlayerHandler extends Thread {
                             ps.println("0");
                         }
 
-                        break;
-
                     case "logout":
                         String nameLO = tokenizer.nextToken();
                         int logoutResult = 0;

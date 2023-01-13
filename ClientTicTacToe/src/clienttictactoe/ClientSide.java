@@ -23,22 +23,19 @@ public class ClientSide {
     Thread thread;
     
     
-    static{
+   
+        
+        
+    
+    public ClientSide(){
         try {
             socket = new Socket("127.0.0.1",9050);
         } catch (IOException ex) {
             Logger.getLogger(ClientSide.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-        
-        
-    
-    public ClientSide(){
-         
         
         thread = new Thread(()->{
         try {
-           
             dis = new DataInputStream(socket.getInputStream ());
             ps = new PrintStream(socket.getOutputStream ());
         } catch (IOException ex) {

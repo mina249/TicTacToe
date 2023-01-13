@@ -33,7 +33,7 @@ public class DataAccessLayer {
         ps.close();
         con.close();
         return result;
-    }
+}
     
     public static int logIn(String name, String password) throws SQLException
     {
