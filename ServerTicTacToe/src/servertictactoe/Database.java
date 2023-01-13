@@ -13,8 +13,8 @@ public class Database {
     static String dbName = "serverdatabase";
     static String url = "jdbc:derby://localhost:1527/serverdatabase";   // Will it change between different laptops ?
     static String driver = "org.apache.derby.jdbc.ClientDriver";
-    static String username = "mina";
-    static String password = "mina";
+    static String username = "root";
+    static String password = "root";
  
     public static void dbConnect() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         Class.forName(driver).newInstance();
