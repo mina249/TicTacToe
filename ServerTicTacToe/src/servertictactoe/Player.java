@@ -1,7 +1,8 @@
 package servertictactoe;
 
 public class Player {
-    private int id;    
+
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -35,7 +36,7 @@ public class Player {
         this.totalScore = totalScore;
         this.numPlayedGames = numPlayedGames;
     }
-        
+
     // All except ID
     public Player(String name, String email, String password, String status, int totalScore, int numPlayedGames) {
         this.name = name;

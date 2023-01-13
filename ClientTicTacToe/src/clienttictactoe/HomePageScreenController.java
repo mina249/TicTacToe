@@ -42,14 +42,14 @@ public class HomePageScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
-    private void handleSinglePlayerBtnAction(ActionEvent event) {     
+    private void handleSinglePlayerBtnAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("DiffecultyLevelScreen.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -59,23 +59,21 @@ public class HomePageScreenController implements Initializable {
 
     @FXML
     private void handleTwoPlayersBtnAction(ActionEvent event) throws IOException {
-        
-     
+
         Parent root = FXMLLoader.load(getClass().getResource("ChosingPlayersNames.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-     
-       
+
     }
 
     @FXML
     private void handlePlayOnlineBtnAction(ActionEvent event) {
-         try {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -87,11 +85,9 @@ public class HomePageScreenController implements Initializable {
     private void handleGameRecordBtnAction(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("GameRecords.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
-  
- }
-    
 
+}

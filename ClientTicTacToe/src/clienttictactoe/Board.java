@@ -4,8 +4,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -36,7 +34,7 @@ public class Board extends Pane {
 
     public Board(Stage stage) {
 
-        this.stage=stage;
+        this.stage = stage;
         rectangle = new Rectangle();
         rectangle0 = new Rectangle();
         rectangle1 = new Rectangle();

@@ -15,19 +15,12 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import static servertictactoe.Database.serverPlayerList;
-import static sun.audio.AudioPlayer.player;
-
 
 /**
  *
  * @author ميناناجحعبدالمسيحزكى
  */
 public class PlayerHandler extends Thread {
-
 
     DataInputStream dis;
     PrintStream ps;
@@ -78,13 +71,13 @@ public class PlayerHandler extends Thread {
                                 ps.println("1;" + userName);
                                 players.add(this);
                             } else {
-                                
+
                                 socket.close();
                             }
                         } catch (SQLException ex) {
                             ps.println("0;" + nameL);
                         }
-                            System.out.println(result);
+                        System.out.println(result);
                         break;
                     case "signup":
                         String mail = tokenizer.nextToken();
@@ -107,11 +100,12 @@ public class PlayerHandler extends Thread {
                         }
 
                         break;
-                    case "move":    String opponentName= tokenizer.nextToken();
-                        System.out.println("opponent name:"+opponentName);
-                        String msgContent= tokenizer.nextToken();
-                        System.out.println("opponent name:"+msgContent);
-                        moveHandling(opponentName,msgContent);
+                    case "move":
+                        String opponentName = tokenizer.nextToken();
+                        System.out.println("opponent name:" + opponentName);
+                        String msgContent = tokenizer.nextToken();
+                        System.out.println("opponent name:" + msgContent);
+                        moveHandling(opponentName, msgContent);
                         break;
                     default:
                         break;
@@ -131,13 +125,11 @@ public class PlayerHandler extends Thread {
      }  
 
 }*/
-
-  private void moveHandling(String opponentName,String moveContent){
-     for(int i = 0 ; i< players.size();i++){
-         if(players.get(i).userName.equals(opponentName) && players.get(i).status.equals("PLAYING")){
-             players.get(i).ps.println(moveContent);
-         }
-     }  
- } 
+    private void moveHandling(String opponentName, String moveContent) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).userName.equals(opponentName) && players.get(i).status.equals("PLAYING")) {
+                players.get(i).ps.println(moveContent);
+            }
+        }
+    }
 }
-

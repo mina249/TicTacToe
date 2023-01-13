@@ -7,16 +7,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ClientTicTacToe extends Application {
-    
+
 // Database Url is:  "jdbc:derby://localhost:1527/clientdatabase"
 // Database Driver Class is: "org.apache.derby.jdbc.ClientDriver"    
 // User is "root"
 // Password is "root"
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("HomePageScreen.fxml"));
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -27,5 +27,5 @@ public class ClientTicTacToe extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

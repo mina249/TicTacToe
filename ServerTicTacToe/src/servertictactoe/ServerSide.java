@@ -9,8 +9,6 @@ package servertictactoe;
  *
  * @author ميناناجحعبدالمسيحزكى
  */
-
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,7 +20,7 @@ import java.util.logging.Logger;
  * @author ميناناجحعبدالمسيحزكى
  */
 public class ServerSide {
-    
+
     ServerSocket serverSocket;
     Thread thread;
 
@@ -30,31 +28,27 @@ public class ServerSide {
 
         serverSocket = new ServerSocket(9050);
 
-        thread = new Thread(()->{
+        thread = new Thread(() -> {
 
-            while(true){
+            while (true) {
 
                 thread = new Thread(() -> {
-                    while(true){
+                    while (true) {
                         try {
                             Socket clientSocket = serverSocket.accept();
                             new PlayerHandler(clientSocket);
-                            
-                        }
-                        catch (IOException ex) {
+
+                        } catch (IOException ex) {
                             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
-                thread.start();  
-       }
-            });
+                thread.start();
+            }
+        });
     }
 
-    public static void main(String [] args){
+    public static void main(String[] args) {
 
     }
 }
-            
-
-   

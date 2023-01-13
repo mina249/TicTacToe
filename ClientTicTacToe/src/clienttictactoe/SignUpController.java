@@ -5,10 +5,7 @@
  */
 package clienttictactoe;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -47,7 +43,7 @@ public class SignUpController implements Initializable {
     private Button btn_SiginUp;
     @FXML
     private Label error_label;
-     
+
     Thread th;
     String msg;
     String reply;
@@ -61,14 +57,13 @@ public class SignUpController implements Initializable {
 
         cs = new ClientSide();
 
-    }  
-  
+    }
 
     @FXML
     public void handleSignupButtonAction(ActionEvent event) throws Exception {
 
         if (tf_Email.getText().isEmpty() || tf_UserNmae.getText().isEmpty() || tf_Password.getText().isEmpty()) {
-                     error_label.setText("Please fill the empty feilds");
+            error_label.setText("Please fill the empty feilds");
         } else {
 
             th = new Thread(() -> {

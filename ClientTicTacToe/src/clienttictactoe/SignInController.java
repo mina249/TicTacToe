@@ -5,10 +5,7 @@
  */
 package clienttictactoe;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
@@ -16,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -40,7 +36,7 @@ public class SignInController implements Initializable {
     private Button btn_Back;
     @FXML
     private TextField tf_UserName;
-     @FXML
+    @FXML
     private PasswordField tx_pass;
     @FXML
     private Button btn_SiginIn;
@@ -54,7 +50,6 @@ public class SignInController implements Initializable {
     ClientSide cs;
     String completeReply;
     StringTokenizer tokenizer;
-     
 
     /**
      * Initializes the controller class.
@@ -95,7 +90,7 @@ public class SignInController implements Initializable {
                     msg = "login" + ";" + tf_UserName.getText() + ";" + tx_pass.getText();
                     cs.ps.println(msg);
                     completeReply = cs.dis.readLine();
-                  tokenizer= new StringTokenizer(completeReply, ";");
+                    tokenizer = new StringTokenizer(completeReply, ";");
                     System.out.println(completeReply);
                     reply = tokenizer.nextToken();
                     System.out.println(reply);

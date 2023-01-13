@@ -24,24 +24,24 @@ public class OnlinePlayerListController implements Initializable {
     private Button buttonRefresh;
 
     @FXML
-    public void handleLogoutButtonAction(ActionEvent event) throws Exception{
+    public void handleLogoutButtonAction(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-         stage.setScene(scene);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
-    public void handleSendInviteButtonAction(ActionEvent event) throws Exception{
+    public void handleSendInviteButtonAction(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Board scr.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-         stage.setScene(scene);
-        stage.show();   
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }   
+    }
 }
