@@ -31,11 +31,6 @@
             <Font name="Showcard Gothic" size="48.0" />
          </font>
       </Label>
-      <Button fx:id="btn_Back1" layoutX="918.0" layoutY="45.0" onAction="#handleBackButtonAction" prefHeight="51.0" prefWidth="135.0" style="-fx-background-radius: 9; -fx-background-color: #ff4948;" text="RECORD" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Showcard Gothic" size="24.0" />
-         </font>
-      </Button>
       <Button fx:id="play_btn" layoutX="465.0" layoutY="618.0" onAction="#handlePlayButtonAction" prefHeight="39.0" prefWidth="111.0" style="-fx-background-radius: 5; -fx-background-color: #ff4948;" text="PLAY" textAlignment="CENTER" textFill="#f4f5d9">
          <font>
             <Font name="System Bold" size="20.0" />
