@@ -19,6 +19,14 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#onRefresh" style="-fx-background-radius: 20;" text="Refresh" GridPane.columnIndex="1">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="15.0" top="150.0" />
+         </GridPane.margin>
+      </Button>
       <Button fx:id="serverOnOffButton" mnemonicParsing="false" onAction="#serverOnOff" style="-fx-background-radius: 20;" text="Server On" GridPane.columnIndex="1">
          <font>
             <Font name="System Bold" size="16.0" />

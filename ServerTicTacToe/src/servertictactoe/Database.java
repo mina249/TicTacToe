@@ -50,19 +50,7 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
-    // For Testing
-    public static void setOnline()
-    {
-        try {
-            Statement stmt = con.createStatement();
-            String queryStrings = "update PLAYER set status = 'online'";
-            stmt.executeUpdate(queryStrings);
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+  
     public static String readyingStringforOnlineList() throws SQLException {
         Statement stmt = con.createStatement();
         String onlinePlayers = "onlinePlayers;";
