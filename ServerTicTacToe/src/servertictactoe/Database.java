@@ -31,18 +31,10 @@ public class Database {
 
             String name = rs.getString(1);
             String status = rs.getString(4);
-            int totalScore = rs.getInt(5);
-            int numPlayedGames = rs.getInt(6);
 
-            Player p = new Player(name, status, totalScore, numPlayedGames);
+            Player p = new Player(name, status);
             players.add(p);
         }
-
-        String name = rs.getString(1);
-        String status = rs.getString(4);
-
-        Player p = new Player(name, status);
-        players.add(p);
 
         return players;
     }

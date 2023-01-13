@@ -50,10 +50,6 @@ public class ServerController implements Initializable {
             Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
-        tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
         tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         try {
             new ServerSide();
