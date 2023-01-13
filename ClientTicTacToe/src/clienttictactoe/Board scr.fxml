@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #1F3274;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienttictactoe.BoardScrController">
+<Pane fx:id="rec_btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #1F3274;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienttictactoe.BoardScrController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="434.0" layoutX="413.0" layoutY="159.0" stroke="#555b6907" strokeLineCap="ROUND" strokeType="INSIDE" width="19.0">
          <fill>
@@ -130,5 +130,10 @@
          </font>
       </Button>
       <MediaView fx:id="videoPlayer" fitHeight="10.0" fitWidth="10.0" onMouseClicked="#removeVideo" preserveRatio="false" />
+      <Button fx:id="rec_btn" layoutX="920.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRecordButtonAction" prefHeight="51.0" prefWidth="132.0" style="-fx-background-color: #ff4948; -fx-background-radius: 111;" text="RECORD" textFill="#fff4f4">
+         <font>
+            <Font name="Showcard Gothic" size="24.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

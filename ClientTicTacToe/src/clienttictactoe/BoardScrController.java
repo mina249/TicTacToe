@@ -1,6 +1,7 @@
  package clienttictactoe;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -62,6 +63,9 @@ public class BoardScrController implements Initializable {
     private Button back_btn_board_sc;
     @FXML
     private MediaView videoPlayer;
+    @FXML
+    private Button rec_btn;
+    
     private Media media;
     private MediaPlayer mediaPlayer;
     private File mediaFile;
@@ -77,6 +81,8 @@ public class BoardScrController implements Initializable {
     private boolean justStarted = true;
     private Button [] board = new Button[9];
     private Button aiBtn;
+    String move="";
+    String game_rec="";
     
 
     private enum GameStatus {
@@ -559,8 +565,41 @@ public class BoardScrController implements Initializable {
                             reviewTheBoard();
                          }
                 }  
+
+                         game_rec= recordGame();
+
             }
         }
      
+       @FXML
+    private void handleRecordButtonAction(ActionEvent event)
+    {
+             
+            try 
+            {
+                GameDate g=new GameDate();
+               String now=g.getGame_date();
+               String date=(String) now.subSequence(0,16);
+               String rec=date.replaceAll(":","-");
+               FileOutputStream fos=new FileOutputStream(new File("src\\records\\"+gameType+"_"+rec+".txt"));
+               byte[] game_recorde =game_rec .getBytes();
+               fos.write(game_recorde);
+              File file = new File("src\\records\\"+gameType+"_"+rec+".txt"); 
+        } catch (IOException ex) {
+            Logger.getLogger(DiffecultyLevelScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
      
+    }
+    private String recordGame()
+    {
+        String txt_box_btn=targetedBtn.getText();
+        String indx_box_btn=targetedBtn.getId();
+        String urmove=txt_box_btn.concat(",").concat(indx_box_btn);
+         String txt_ai_btn=targetedBtn.getText();
+        String indx_ai_btn=targetedBtn.getId();
+       String aimove=txt_ai_btn.concat(",").concat(indx_ai_btn);
+       move=urmove+","+aimove+","+move;
+       return move;
+}
     }
