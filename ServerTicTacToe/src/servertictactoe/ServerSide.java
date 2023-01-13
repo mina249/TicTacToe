@@ -27,37 +27,30 @@ public class ServerSide {
     Thread thread;
 
     public ServerSide() {
-/*       
-        thread = new Thread(()->{
-
-            while(true){
+       
         try {
-            
-            
-                Socket clientSocket = serverSocket.accept();
-                new PlayerHandler(clientSocket);
-                
-            }
-        catch (IOException ex) {
+            serverSocket = new ServerSocket(9050);
+            thread = new Thread(() -> {
+                while(true){
+                    try {
+                        Socket clientSocket = serverSocket.accept();
+                        new PlayerHandler(clientSocket);
+                        
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            thread.start();
+        } catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-         });
-         thread.start();
-*/
-    }
+    
+       }
     public static void main(String [] args){
-/*            new ServerSide();
+         
     }
             
-
-            }
-    });
-        
-        thread.start();
-    }
-    public static void main(String [] args) {
-        new ServerSide();
-*/
-    }
+  
 } 
