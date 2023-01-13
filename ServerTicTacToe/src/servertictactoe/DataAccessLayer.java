@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import static java.sql.ResultSet.TYPE_SCROLL_INSENSITIVE;
 import java.sql.SQLException;
 
 /**
@@ -58,6 +57,38 @@ public class DataAccessLayer {
         ps.close();
         con.close();
         rs.close();
+        return result;
+    }
+    
+    public static int logout(String name) throws SQLException
+    {
+        connect();
+        int result=0;
+        PreparedStatement ps = con.prepareStatement("UPDATE PLAYER set STATUS=? where USERNAME=?");
+        ps.setString(1, "offline");
+        ps.setString(2, name);
+        result= ps.executeUpdate();
+        con.commit();
+        ps.close();
+        con.close();
+        return result;
+    }
+    
+    public static int connectedSuccessfuly(String player1, String player2) throws SQLException
+    {
+        connect();
+        int result=0;
+        PreparedStatement ps = con.prepareStatement("UPDATE PLAYER set STATUS=? where USERNAME=?");
+        ps.setString(1, "playing");
+        ps.setString(2, player1);
+        result= ps.executeUpdate();
+        
+        ps.setString(1, "playing");
+        ps.setString(2, player2);
+        ps.executeUpdate();
+        con.commit();
+        ps.close();
+        con.close();  
         return result;
     }
     

@@ -40,7 +40,7 @@ public class SignInController implements Initializable {
     private Button btn_Back;
     @FXML
     private TextField tf_UserName;
-     @FXML
+    @FXML
     private PasswordField tx_pass;
     @FXML
     private Button btn_SiginIn;
@@ -54,7 +54,8 @@ public class SignInController implements Initializable {
     ClientSide cs;
     String completeReply;
     StringTokenizer tokenizer;
-     
+    BoardScrController boardScr = new BoardScrController();
+    OnlinePlayerListController playerList = new OnlinePlayerListController();
 
     /**
      * Initializes the controller class.
@@ -95,7 +96,7 @@ public class SignInController implements Initializable {
                     msg = "login" + ";" + tf_UserName.getText() + ";" + tx_pass.getText();
                     cs.ps.println(msg);
                     completeReply = cs.dis.readLine();
-                  tokenizer= new StringTokenizer(completeReply, ";");
+                    tokenizer = new StringTokenizer(completeReply, ";");
                     System.out.println(completeReply);
                     reply = tokenizer.nextToken();
                     System.out.println(reply);

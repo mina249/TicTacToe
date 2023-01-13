@@ -70,6 +70,7 @@ public class SignUpController implements Initializable {
 
             th = new Thread(() -> {
                 try {
+                    while(true){
                     msg = "signup" + ";" + tf_Email.getText() + ";" + tf_UserNmae.getText() + ";" + tf_Password.getText();
                     cs.ps.println(msg);
                     reply = cs.dis.readLine();
@@ -100,10 +101,11 @@ public class SignUpController implements Initializable {
                         });
 
                     }
-
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
             });
 
             th.start();

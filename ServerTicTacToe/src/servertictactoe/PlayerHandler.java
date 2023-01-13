@@ -37,7 +37,8 @@ public class PlayerHandler extends Thread {
     private int totalScore;
     private int numPlayedGames;
     static Vector<PlayerHandler> players = new Vector<PlayerHandler>();
-
+ 
+        //Latest
     public PlayerHandler(Socket cs) {
         try {
 
@@ -105,11 +106,28 @@ public class PlayerHandler extends Thread {
                         }
 
                         break;
+                        
+                        case "logout":
+                        String nameLO= tokenizer.nextToken();
+                        int logoutResult=0;
+                        logoutResult= DataAccessLayer.logout(nameLO);
+                        if (logoutResult==1)
+                        {
+                            ps.println("1");
+                            socket.close();
+                        }
+                        else
+                        {
+                            socket.close();
+                        }
+                        break;
                     default:
                         break;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                ps.println("0");
             }
         }
     }
