@@ -65,6 +65,7 @@ public class BoardScrController implements Initializable {
     private Media media;
     private MediaPlayer mediaPlayer;
     private File mediaFile;
+    boolean isVideoStart = false;
     private String textOfBtn = "X";
     private Button targetedBtn;
     private static int firstPlayerScore = 0;
@@ -436,13 +437,18 @@ public class BoardScrController implements Initializable {
         videoPlayer.setFitHeight(600);
         videoPlayer.setFitWidth(1080);
         mediaPlayer.play();
+        isVideoStart = true;
      }
      
      public void removeVideo()
      {
         // On mouse click
+        if (isVideoStart == true)
+        {
         mediaPlayer.stop();
         videoPlayer.setVisible(false);
+        isVideoStart = false;
+        }
      }
      
      
