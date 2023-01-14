@@ -77,7 +77,7 @@ public class SignUpController implements Initializable {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                error_label.setText("This user name is already exist, try another one");
+                                error_label.setText("This user name already exists,please try another one");
 
                             }
 
