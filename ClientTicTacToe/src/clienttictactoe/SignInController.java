@@ -54,8 +54,7 @@ public class SignInController implements Initializable {
     ClientSide cs;
     String completeReply;
     StringTokenizer tokenizer;
-    BoardScrController boardScr = new BoardScrController();
-    OnlinePlayerListController playerList = new OnlinePlayerListController();
+    private static String userName;
 
     /**
      * Initializes the controller class.
@@ -88,7 +87,7 @@ public class SignInController implements Initializable {
     private void handleSignInButtonAction(ActionEvent event) {
 
         if (tf_UserName.getText().isEmpty() || tx_pass.getText().isEmpty()) {
-            error_label.setText("Please fill the empty feilds");
+            error_label.setText("Please fill the empty fields");
         } else {
             th = new Thread(() -> {
 
@@ -97,26 +96,28 @@ public class SignInController implements Initializable {
                     cs.ps.println(msg);
                     completeReply = cs.dis.readLine();
                     tokenizer = new StringTokenizer(completeReply, ";");
-                    System.out.println(completeReply);
                     reply = tokenizer.nextToken();
-                    System.out.println(reply);
                     if (reply.equals("0")) {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
                                 error_label.setText("Wrong user Name or password try to signup");
-
                             }
 
                         });
+
                     } else {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
                                 try {
-                                    Parent root = FXMLLoader.load(getClass().getResource("OnlinePlayerList.fxml"));
+                                    String name = tf_UserName.getText();
+                                    FXMLLoader loader= new FXMLLoader(getClass().getResource("OnlinePlayerList.fxml"));
+                                    Parent root= loader.load();
+                                    OnlinePlayerListController onlineList= loader.getController();
+                                    onlineList.getUserName(name);
                                     Scene scene = new Scene(root);
-                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                                     stage.setScene(scene);
                                     stage.show();
                                 } catch (IOException ex) {
@@ -136,4 +137,9 @@ public class SignInController implements Initializable {
         }
 
     }
+    
+    public String getLoginName()
+    {
+        return userName;
+    }  
 }

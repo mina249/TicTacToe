@@ -21,21 +21,15 @@ public class ClientSide {
     PrintStream ps;
     static Socket socket;
     Thread thread;
-    
-    
-    static{
-        try {
+        
+    public ClientSide(){
+         
+         try {
             socket = new Socket("127.0.0.1",9050);
         } catch (IOException ex) {
             Logger.getLogger(ClientSide.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-        
-        
-    
-    public ClientSide(){
          
-        
         thread = new Thread(()->{
         try {
            
