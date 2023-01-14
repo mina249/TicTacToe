@@ -77,13 +77,16 @@ public class PlayerHandler extends Thread {
                                 ps.println("1;" + userName);
                                 players.add(this);
                             } else {
+                                 ps.println("0;" + nameL);
 
-                                socket.close();
                             }
                         } catch (SQLException ex) {
-                            ps.println("0;" + nameL);
+                              socket.close();
+                           ex.printStackTrace();
                         }
-                        System.out.println(result);
+                            System.out.println(result);
+
+
                         break;
                     case "signup":
                         String mail = tokenizer.nextToken();
@@ -111,12 +114,15 @@ public class PlayerHandler extends Thread {
                         String nameLO = tokenizer.nextToken();
                         int logoutResult = 0;
                         logoutResult = DataAccessLayer.logout(nameLO);
+                        System.out.println(logoutResult);
                         if (logoutResult == 1) {
                             ps.println("1");
                             socket.close();
                         } else {
+                            ps.println("0");
                             socket.close();
                         }
+                        System.out.println(logoutResult);
                         break;
                     case "move":
                         String opponentName = tokenizer.nextToken();

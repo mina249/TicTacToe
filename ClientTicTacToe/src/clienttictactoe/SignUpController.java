@@ -65,7 +65,7 @@ public class SignUpController implements Initializable {
     public void handleSignupButtonAction(ActionEvent event) throws Exception {
 
         if (tf_Email.getText().isEmpty() || tf_UserNmae.getText().isEmpty() || tf_Password.getText().isEmpty()) {
-                     error_label.setText("Please fill the empty feilds");
+                     error_label.setText("Please fill the empty fields");
         } else {
 
             th = new Thread(() -> {
@@ -78,7 +78,7 @@ public class SignUpController implements Initializable {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                error_label.setText("This user name is already exist, try another one");
+                                error_label.setText("This user name already exists,please try another one");
 
                             }
 
