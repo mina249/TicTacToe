@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clienttictactoe;
 
-import clienttictactoe.BoardScrController;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,10 +28,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
-/**
- *
- * @author ITi
- */
 public class FXMLDocumentController implements Initializable {
 
     private enum GameStatus {
@@ -118,6 +106,7 @@ public class FXMLDocumentController implements Initializable {
     GameType currentGameType;
     private String senderRequistName;
     private String opponentName;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("init called");
@@ -129,33 +118,33 @@ public class FXMLDocumentController implements Initializable {
         playerX.setText(senderRequistName);
         playerO.setText(opponentName);
         currentStatus = GameStatus.PLAYING;
-         try {
+        try {
             mySocket = new Socket("127.0.0.1", 5009);
             ps = new PrintStream(mySocket.getOutputStream());
             dis = new DataInputStream(mySocket.getInputStream());
-        
-        updateUIThread = new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        receivedMsg = dis.readLine() + "\n";
-                        targetedBtnIndex = receivedMsg.charAt(0);
-                        textOfBtn = receivedMsg.charAt(1);
-                        System.out.println("the data reched" + receivedMsg);
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                setTxtToAcertainButton(targetedBtnIndex, textOfBtn);
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+            updateUIThread = new Thread() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            receivedMsg = dis.readLine() + "\n";
+                            targetedBtnIndex = receivedMsg.charAt(0);
+                            textOfBtn = receivedMsg.charAt(1);
+                            System.out.println("the data reched" + receivedMsg);
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setTxtToAcertainButton(targetedBtnIndex, textOfBtn);
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        };
-        updateUIThread.start();
+            };
+            updateUIThread.start();
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,13 +170,13 @@ public class FXMLDocumentController implements Initializable {
                     highlightTheLabel('o');
                 }
                 targetedBtn.setText("" + textOfBtn);
-                sendedMsg = ""+"move"+";"+opponentName+";"+targetedBtnIndex+textOfBtn;
+                sendedMsg = "" + "move" + ";" + opponentName + ";" + targetedBtnIndex + textOfBtn;
                 ps.println(sendedMsg);
                 reviewTheBoard();
             }
         }
     }
-     
+
     public void setTxtToAcertainButton(char indexOfBtn, char textOfBtn) {
         if (currentStatus == GameStatus.PLAYING) {
             myTurn = true;
@@ -235,8 +224,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-  // JUST THE UTILITY OF PLAYING THE GAME
-
+    // JUST THE UTILITY OF PLAYING THE GAME
     private boolean isAnyRowNotifyWinningSomeone() {
         boolean flag = false;
         if (box1.getText().equals(box2.getText()) && box2.getText().equals(box3.getText())
@@ -381,7 +369,7 @@ public class FXMLDocumentController implements Initializable {
             a.setContentText("The player  " + opponentName + "wines the game");
             highlightTheLabel('o');
         }
-    //    playVideo();
+        //    playVideo();
         a.getDialogPane().getButtonTypes().add(ok);
         a.showAndWait();
         setStandrdStart();
@@ -432,7 +420,7 @@ public class FXMLDocumentController implements Initializable {
         textOfBtn = 'X';
         numberOfClickedBoxes = 0;
         highlightTheLabel('o');
-       // removeVideo();
+        // removeVideo();
     }
 
 //    public void playVideo() {
@@ -460,5 +448,4 @@ public class FXMLDocumentController implements Initializable {
 //        mediaPlayer.stop();
 //        videoPlayer.setVisible(false);
 //    }
-
 }

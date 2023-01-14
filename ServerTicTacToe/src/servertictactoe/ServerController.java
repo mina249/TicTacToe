@@ -18,7 +18,6 @@ import static servertictactoe.Database.dbConnect;
 import static servertictactoe.Database.serverPlayerList;
 import static servertictactoe.Database.setOffline;
 
-
 public class ServerController implements Initializable {
 
     @FXML
@@ -37,9 +36,6 @@ public class ServerController implements Initializable {
     private Circle circleGreen;
     ObservableList playersList;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -49,25 +45,21 @@ public class ServerController implements Initializable {
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
-            tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-            tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
-            new ServerSide();
-            //serverSide.openSocket();
+        tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
+        tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
+        new ServerSide();
+        //serverSide.openSocket();
     }
-    
-    public void serverOnOff()
-    {
-        if(serverOnOffButton.getText().equals("Server On"))
-        {
+
+    public void serverOnOff() {
+        if (serverOnOffButton.getText().equals("Server On")) {
             serverOnOffButton.setText("Server Off");
             circleGreen.setVisible(false);
-            setOffline();           
+            setOffline();
             //serverSide.closeSocket();
-        }
-        else
-        {          
+        } else {
             serverOnOffButton.setText("Server On");
             circleGreen.setVisible(true);
             //serverSide.openSocket();
@@ -75,14 +67,13 @@ public class ServerController implements Initializable {
         onRefresh();
     }
 
-    public void onRefresh()
-    {
-        Platform.runLater( () -> {
-        try {
-            ObservableList players = Database.serverPlayerList();
-            tableView.setItems(players);
-            tableColumnName.setCellValueFactory(new PropertyValueFactory<Player, String>("name"));
-            tableColumnStatus.setCellValueFactory(new PropertyValueFactory<Player, String>("status"));
+    public void onRefresh() {
+        Platform.runLater(() -> {
+            try {
+                ObservableList players = Database.serverPlayerList();
+                tableView.setItems(players);
+                tableColumnName.setCellValueFactory(new PropertyValueFactory<Player, String>("name"));
+                tableColumnStatus.setCellValueFactory(new PropertyValueFactory<Player, String>("status"));
             } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
             }

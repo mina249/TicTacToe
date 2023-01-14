@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.logging.Level;
@@ -41,68 +39,51 @@ public class OnlinePlayerListController implements Initializable {
     private Button buttonSendInvite;
     @FXML
     private Button buttonRefresh;
-
-
-    Thread thread;
-    ClientSide cs;
-    StringTokenizer tokenizer;
-    ObservableList<Player> onlineList = FXCollections.observableArrayList();
-
-    @FXML
-    public void handleLogoutButtonAction(ActionEvent event) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void handleSendInviteButtonAction(ActionEvent event) throws Exception {
-        String currentSelection = tableView.getSelectionModel().getSelectedItem().getName();
-        System.out.println("Current Selection " + currentSelection);
-
     @FXML
     private Label loggedName;
     Thread th;
     String msg;
     String reply;
     ClientSide cs;
-    SignInController signIn= new SignInController();
+    Thread thread;
+    StringTokenizer tokenizer;
+    ObservableList<Player> onlineList = FXCollections.observableArrayList();
+    SignInController signIn = new SignInController();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        String currentSelection = tableView.getSelectionModel().getSelectedItem().getName();
+
         cs = new ClientSide();
+        acceptingOnlineList();
     }
-    
-     public void getUserName(String name)
-    {
+
+    public void getUserName(String name) {
         loggedName.setText(name);
-        loggedUserName= loggedName.getText();
+        loggedUserName = loggedName.getText();
     }
 
     @FXML
     public void handleLogoutButtonAction(ActionEvent event) throws Exception {
         th = new Thread(() -> {
-           while (true) {
+            while (true) {
                 try {
                     msg = "logout" + ";" + loggedUserName;
                     cs.ps.println(msg);
                     reply = cs.dis.readLine();
-                    if (reply.equals("1") && reply!=null) {
+                    if (reply.equals("1") && reply != null) {
                         Platform.runLater(new Runnable() {
-                        @Override
+                            @Override
                             public void run() {
-                            try {
-                                Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-                                Scene scene = new Scene(root);
-                                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                stage.setScene(scene);
-                                stage.show();
-                            } catch (IOException ex) {
-                                Logger.getLogger(OnlinePlayerListController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                                    Scene scene = new Scene(root);
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(OnlinePlayerListController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
                         });
                     }
@@ -122,12 +103,6 @@ public class OnlinePlayerListController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        cs = new ClientSide();
-        acceptingOnlineList();
     }
 
     public void getLoginName(String loggedUserName) {
@@ -162,6 +137,5 @@ public class OnlinePlayerListController implements Initializable {
             }
         });
         thread.start();
-    }
     }
 }

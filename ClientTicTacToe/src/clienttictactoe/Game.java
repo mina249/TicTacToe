@@ -1,17 +1,14 @@
-
 package clienttictactoe;
 
+public class Game {
 
-public class Game 
-{
     private String player_o_name;
     private String player_x_name;
     private String game_date;
     private String game_status;
-     private String game_type;
+    private String game_type;
 
-    public Game(String player_o_name, String player_x_name, String game_date, String game_status, String game_type) 
-    {
+    public Game(String player_o_name, String player_x_name, String game_date, String game_status, String game_type) {
         this.player_o_name = player_o_name;
         this.player_x_name = player_x_name;
         this.game_date = game_date;
@@ -58,5 +55,5 @@ public class Game
     public void setGame_type(String game_type) {
         this.game_type = game_type;
     }
-      
+
 }

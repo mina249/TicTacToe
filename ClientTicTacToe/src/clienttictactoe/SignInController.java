@@ -1,9 +1,6 @@
 package clienttictactoe;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
@@ -11,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,11 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author ميناناجحعبدالمسيحزكى
- */
 public class SignInController implements Initializable {
 
     @FXML
@@ -56,7 +47,7 @@ public class SignInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          cs = new ClientSide();
+        cs = new ClientSide();
 
     }
 
@@ -80,7 +71,7 @@ public class SignInController implements Initializable {
 
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
-          
+
         if (tf_UserName.getText().isEmpty() || tx_pass.getText().isEmpty()) {
             error_label.setText("Please fill the empty fields");
         } else {
@@ -107,12 +98,12 @@ public class SignInController implements Initializable {
                             public void run() {
                                 try {
                                     String name = tf_UserName.getText();
-                                    FXMLLoader loader= new FXMLLoader(getClass().getResource("OnlinePlayerList.fxml"));
-                                    Parent root= loader.load();
-                                    OnlinePlayerListController onlineList= loader.getController();
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("OnlinePlayerList.fxml"));
+                                    Parent root = loader.load();
+                                    OnlinePlayerListController onlineList = loader.getController();
                                     onlineList.getUserName(name);
                                     Scene scene = new Scene(root);
-                                    Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     stage.setScene(scene);
                                     stage.show();
                                 } catch (IOException ex) {
@@ -132,9 +123,8 @@ public class SignInController implements Initializable {
         }
 
     }
-    
-    public String getLoginName()
-    {
+
+    public String getLoginName() {
         return userName;
-    }  
+    }
 }

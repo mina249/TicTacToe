@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servertictactoe;
 
 import java.io.DataInputStream;
@@ -17,17 +11,8 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import static servertictactoe.Database.con;
-import static servertictactoe.Database.serverPlayerList;
-import static sun.audio.AudioPlayer.player;
 
-/**
- *
- * @author ميناناجحعبدالمسيحزكى
- */
 public class PlayerHandler extends Thread {
 
     DataInputStream dis;
@@ -56,14 +41,14 @@ public class PlayerHandler extends Thread {
     }
 
     public void run() {
-         String onlinePlayers;
+        String onlinePlayers;
         try {
             onlinePlayers = readyingStringforOnlineList();
-             ps.println(onlinePlayers);
+            ps.println(onlinePlayers);
         } catch (SQLException ex) {
             Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-             
+
         while (true) {
             try {
                 String completeMsg = dis.readLine();
@@ -88,13 +73,13 @@ public class PlayerHandler extends Thread {
                                 ps.println("1;" + userName);
                                 players.add(this);
                             } else {
-                                 ps.println("0;" + nameL);
+                                ps.println("0;" + nameL);
                             }
                         } catch (SQLException ex) {
-                              socket.close();
-                           ex.printStackTrace();
+                            socket.close();
+                            ex.printStackTrace();
                         }
-                            System.out.println(result);
+                        System.out.println(result);
                         break;
                     case "signup":
                         String mail = tokenizer.nextToken();
@@ -140,7 +125,7 @@ public class PlayerHandler extends Thread {
                     /*case "onlinePlayers":
                         String onlinePlayers = readyingStringforOnlineList();
                         ps.println(onlinePlayers);*/
-                        
+
                     default:
                         break;
                 }
@@ -149,11 +134,9 @@ public class PlayerHandler extends Thread {
             } catch (SQLException ex) {
                 Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
+
         }
-      
-        
+
     }
 
     private void sendRequest(String sender, String reciever) {
@@ -172,17 +155,17 @@ public class PlayerHandler extends Thread {
             }
         }
     }
-    
-     public static String readyingStringforOnlineList() throws SQLException {
+
+    public static String readyingStringforOnlineList() throws SQLException {
         Statement stmt = con.createStatement();
         String onlinePlayers = "onlinePlayers;";
         String queryString = "select * from Player where status in ('Online', 'online')";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
-           String name = rs.getString(1);
-           Player p = new Player(name);
-           onlinePlayers += p.getName() + ";";
+            String name = rs.getString(1);
+            Player p = new Player(name);
+            onlinePlayers += p.getName() + ";";
         }
         return onlinePlayers;
-    }  
+    }
 }

@@ -20,16 +20,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- */
 public class BoardScrController implements Initializable {
 
     @FXML
@@ -76,10 +72,9 @@ public class BoardScrController implements Initializable {
     private String user = "O";
     private String gameType;
     private boolean justStarted = true;
-    private Button [] board = new Button[9];
+    private Button[] board = new Button[9];
     private Button aiBtn;
     private String loggedUserName;
-    
 
     private enum GameStatus {
         TERMINATED, PLAYING, WINFIRSTPLAYER, WINSECONDPLAYER, DRAW;
@@ -100,45 +95,43 @@ public class BoardScrController implements Initializable {
         currentStatus = GameStatus.PLAYING;
         highlightTheLabel('o');
         board[0] = box1;
-        board[1]= box2;
-        board[2]= box3;
-        board[3]= box4;
-        board[4]= box5;
-        board[5]= box6;
-        board[6]= box7;
-        board[7]= box8;
-        board[8]= box9;
+        board[1] = box2;
+        board[2] = box3;
+        board[3] = box4;
+        board[4] = box5;
+        board[5] = box6;
+        board[6] = box7;
+        board[7] = box8;
+        board[8] = box9;
     }
 
     @FXML
     private void notifyPressing(ActionEvent event) {
         // Sets difficulty or game type after first button press
-        if(justStarted == true)
-        {    
-        gameType = title.getText();
-        switch (gameType) {
-            case "EASY DIFFICULTY":
-                currentGameType = GameType.EASY;
-                break;
-            case "MEDIUM DIFFICULTY":
-                currentGameType = GameType.MEDIUM;
-                break;
-            case "HARD DIFFICULTY":
-                currentGameType = GameType.HARD;
-                break;
-            case "TWOPLAYERS":
-                currentGameType = GameType.TWOPLAYERSLOCAL;
-                break;
-            case "MULTIPLAYER":
-                currentGameType = GameType.MULTIPLAYER;
-                break;
-            default:
-                break;
+        if (justStarted == true) {
+            gameType = title.getText();
+            switch (gameType) {
+                case "EASY DIFFICULTY":
+                    currentGameType = GameType.EASY;
+                    break;
+                case "MEDIUM DIFFICULTY":
+                    currentGameType = GameType.MEDIUM;
+                    break;
+                case "HARD DIFFICULTY":
+                    currentGameType = GameType.HARD;
+                    break;
+                case "TWOPLAYERS":
+                    currentGameType = GameType.TWOPLAYERSLOCAL;
+                    break;
+                case "MULTIPLAYER":
+                    currentGameType = GameType.MULTIPLAYER;
+                    break;
+                default:
+                    break;
+            }
+            justStarted = false;
         }
-        justStarted = false;
-        }
-      
-        
+
         switch (currentGameType) {
             case EASY:
                 handleEasyModeOnPressed(event);
@@ -147,7 +140,7 @@ public class BoardScrController implements Initializable {
                 handleMediumModeOnPressed(event);
                 break;
             case HARD:
-                
+
                 break;
             case TWOPLAYERSLOCAL:
                 handleThePressedBtnTwoPlayersMood(event);
@@ -164,7 +157,7 @@ public class BoardScrController implements Initializable {
     private void handlePlayAgainBtn(ActionEvent event) {
         setStandrdStart();
     }
-    
+
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException {
         currentStatus = GameStatus.TERMINATED;
@@ -287,9 +280,9 @@ public class BoardScrController implements Initializable {
 
     private boolean isBoardFull() {
         boolean flag = false;
-        if (numberOfClickedBoxes >= 9){
-                flag = true;
-            }
+        if (numberOfClickedBoxes >= 9) {
+            flag = true;
+        }
         return flag;
     }
 
@@ -314,7 +307,7 @@ public class BoardScrController implements Initializable {
         }
     }
 
-    public void handleWinningSomeOne(){
+    public void handleWinningSomeOne() {
         if (currentStatus == GameStatus.WINFIRSTPLAYER) {
             firstPlayerScore += 10;
             highlightTheLabel('x');
@@ -373,56 +366,36 @@ public class BoardScrController implements Initializable {
         removeVideo();
     }
 
-    
-    
-    
-    
-    
-   
-    public boolean notifiyWining(){
-        
-        if(isAnyColumnNotifyWinningSomeone()==true || isAnyDiagonalNotifyWinningSomeone()==true || isAnyRowNotifyWinningSomeone()==true)
+    public boolean notifiyWining() {
+
+        if (isAnyColumnNotifyWinningSomeone() == true || isAnyDiagonalNotifyWinningSomeone() == true || isAnyRowNotifyWinningSomeone() == true) {
             return true;
-        
+        }
+
         return false;
     }
-    
-      
-    
-    
-   
-    
 
-     public void intializeLabels(String titles, String playerxName, String playeroName)
-     {
+    public void intializeLabels(String titles, String playerxName, String playeroName) {
         title.setText(titles);
-        if(titles.contains("DIFFICULTY"))
-        {
+        if (titles.contains("DIFFICULTY")) {
             playerX.setText("Player O\n" + "You");
             playerO.setText("Player X\n" + "Computer");
-        }
-        else if(titles.equals("TWOPLAYERS"))
-        {
+        } else if (titles.equals("TWOPLAYERS")) {
             playerX.setText("Player X\n" + playerxName);
             playerO.setText("Player O\n" + playeroName);
+        } else if (titles.equals("MULTIPLAYER")) {
         }
-        else if(titles.equals("MULTIPLAYER"))
-        {
-        }
-        
+
         playerX.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
         playerO.setTextFill(javafx.scene.paint.Color.valueOf("#ff4948"));
         playerX.setFont(new Font("Bookman Old Style", 35.0));
         playerO.setFont(new Font("Bookman Old Style", 35.0));
-     } 
-     public void playVideo()
-     {
-        if(currentStatus == GameStatus.WINFIRSTPLAYER)
-        {
+    }
+
+    public void playVideo() {
+        if (currentStatus == GameStatus.WINFIRSTPLAYER) {
             mediaFile = new File("src/clienttictactoe/Fireworks.mp4");
-        }
-        else
-        {
+        } else {
             mediaFile = new File("src/clienttictactoe/Fireworks.mp4");
         }
         try {
@@ -438,139 +411,134 @@ public class BoardScrController implements Initializable {
         videoPlayer.setFitWidth(1080);
         mediaPlayer.play();
         isVideoStart = true;
-     }
-     
-     public void removeVideo()
-     {
+    }
+
+    public void removeVideo() {
         // On mouse click
-        if (isVideoStart == true)
-        {
-        mediaPlayer.stop();
-        videoPlayer.setVisible(false);
-        isVideoStart = false;
+        if (isVideoStart == true) {
+            mediaPlayer.stop();
+            videoPlayer.setVisible(false);
+            isVideoStart = false;
         }
-     }
-     
-     
-     
-     
-    private Button easyMode(){
+    }
+
+    private Button easyMode() {
         Random random = new Random();
-        int index = 0 ;
-        if(!isBoardFull() && !notifiyWining()&&!isBoardEmpty()){
-        do{
-        
-           index = random.nextInt(9);
-        
-        }while(!board[index].getText().equals(""));
+        int index = 0;
+        if (!isBoardFull() && !notifiyWining() && !isBoardEmpty()) {
+            do {
+
+                index = random.nextInt(9);
+
+            } while (!board[index].getText().equals(""));
         }
         return board[index];
     }
-    
-     public void handleEasyModeOnPressed(ActionEvent e) {
+
+    public void handleEasyModeOnPressed(ActionEvent e) {
         if (currentStatus == GameStatus.PLAYING) {
             targetedBtn = (Button) e.getSource();
             if (targetedBtn.getText().equals("")) {
                 targetedBtn.setText(user);
-                    targetedBtn.setStyle("-fx-text-fill: #febd08;-fx-background-color: #1F3274; ");
-                    highlightTheLabel('o');
+                targetedBtn.setStyle("-fx-text-fill: #febd08;-fx-background-color: #1F3274; ");
+                highlightTheLabel('o');
+                numberOfClickedBoxes++;
+                reviewTheBoard();
+                if (!isBoardFull() && !notifiyWining() && !isBoardEmpty()) {
+                    aiBtn = easyMode();
+                    aiBtn.setText(ai);
+                    aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
+                    highlightTheLabel('x');
                     numberOfClickedBoxes++;
                     reviewTheBoard();
-                    if(!isBoardFull()&&!notifiyWining() && !isBoardEmpty()){
-                        aiBtn = easyMode();
-                        aiBtn.setText(ai);
-                        aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
-                        highlightTheLabel('x');
-                         numberOfClickedBoxes++;
-                            reviewTheBoard();
-                    }
-                }  
-            }
-        }
-     
-        private boolean isBoardEmpty(){
-            boolean flag = true;
-            for(int i = 0 ; i<board.length ; i++){
-                if(board[i].getText().equals(ai)||board[i].getText().equals(user)){
-                        flag = false;
                 }
-            
             }
-            return false;
         }
-     
-        private boolean isUserWillWin(Button b1 , Button b2 , Button b3){
-              boolean flag = false;
-              if(b1.getText().equals(b2.getText())&&b1.getText().equals(user) && b3.getText().equals("")){
-                  flag = true;
-              }else if(b2.getText().equals(b3.getText())&&b2.getText().equals(user)&& b1.getText().equals("")){
-                  flag = true;
-              }else if(b1.getText().equals(b3.getText())&&b1.getText().equals(user)&& b2.getText().equals("")){
-                    flag = true;
-              }
-              return flag;
-        }
-        
-        private Button preventUserWining(Button b1 , Button b2 , Button b3){
-            Button temp = new Button();
-            if(b1.getText().equals(b2.getText()) && b3.getText().equals("")){
-                 temp = b3;
-              }else if(b2.getText().equals(b3.getText())&& b1.getText().equals("")){
-                  temp = b1;
-              }else if(b1.getText().equals(b3.getText())&& b2.getText().equals("")){
-                    temp = b2;
-              }
-              return temp;
-            
-        }
-          
-        private Button mediumMode(){
-            Button medium = new Button();
-            if(isUserWillWin(board[0], board[1], board[2])){
-                medium = preventUserWining(board[0], board[1], board[2]);
-            }else if(isUserWillWin(board[3], board[4], board[5])){
-                medium = preventUserWining(board[3], board[4], board[5]);
-            }else if (isUserWillWin(board[6], board[7], board[8])){
-                medium = preventUserWining(board[6], board[7], board[8]);
-            }else if (isUserWillWin(board[0], board[3], board[6])){
-                medium = preventUserWining(board[0], board[3], board[6]);
-            }else if (isUserWillWin(board[1], board[1], board[7])){
-                medium = preventUserWining(board[1], board[1], board[7]);
-            }else if (isUserWillWin(board[2], board[5], board[8])){
-                medium = preventUserWining(board[2], board[5], board[8]);
-            }else if(isUserWillWin(board[0], board[4], board[8])){
-                medium = preventUserWining(board[0], board[4], board[8]);
-            }else if (isUserWillWin(board[2], board[4], board[6])){
-                    medium = preventUserWining(board[2], board[4], board[6]);
-            }else{
-                medium = easyMode();
+    }
+
+    private boolean isBoardEmpty() {
+        boolean flag = true;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i].getText().equals(ai) || board[i].getText().equals(user)) {
+                flag = false;
             }
-            return medium;
+
         }
-        
-        public void handleMediumModeOnPressed(ActionEvent e) {
+        return false;
+    }
+
+    private boolean isUserWillWin(Button b1, Button b2, Button b3) {
+        boolean flag = false;
+        if (b1.getText().equals(b2.getText()) && b1.getText().equals(user) && b3.getText().equals("")) {
+            flag = true;
+        } else if (b2.getText().equals(b3.getText()) && b2.getText().equals(user) && b1.getText().equals("")) {
+            flag = true;
+        } else if (b1.getText().equals(b3.getText()) && b1.getText().equals(user) && b2.getText().equals("")) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    private Button preventUserWining(Button b1, Button b2, Button b3) {
+        Button temp = new Button();
+        if (b1.getText().equals(b2.getText()) && b3.getText().equals("")) {
+            temp = b3;
+        } else if (b2.getText().equals(b3.getText()) && b1.getText().equals("")) {
+            temp = b1;
+        } else if (b1.getText().equals(b3.getText()) && b2.getText().equals("")) {
+            temp = b2;
+        }
+        return temp;
+
+    }
+
+    private Button mediumMode() {
+        Button medium = new Button();
+        if (isUserWillWin(board[0], board[1], board[2])) {
+            medium = preventUserWining(board[0], board[1], board[2]);
+        } else if (isUserWillWin(board[3], board[4], board[5])) {
+            medium = preventUserWining(board[3], board[4], board[5]);
+        } else if (isUserWillWin(board[6], board[7], board[8])) {
+            medium = preventUserWining(board[6], board[7], board[8]);
+        } else if (isUserWillWin(board[0], board[3], board[6])) {
+            medium = preventUserWining(board[0], board[3], board[6]);
+        } else if (isUserWillWin(board[1], board[1], board[7])) {
+            medium = preventUserWining(board[1], board[1], board[7]);
+        } else if (isUserWillWin(board[2], board[5], board[8])) {
+            medium = preventUserWining(board[2], board[5], board[8]);
+        } else if (isUserWillWin(board[0], board[4], board[8])) {
+            medium = preventUserWining(board[0], board[4], board[8]);
+        } else if (isUserWillWin(board[2], board[4], board[6])) {
+            medium = preventUserWining(board[2], board[4], board[6]);
+        } else {
+            medium = easyMode();
+        }
+        return medium;
+    }
+
+    public void handleMediumModeOnPressed(ActionEvent e) {
         if (currentStatus == GameStatus.PLAYING) {
             targetedBtn = (Button) e.getSource();
             if (targetedBtn.getText().equals("")) {
                 targetedBtn.setText(user);
-                    targetedBtn.setStyle("-fx-text-fill: #febd08;-fx-background-color: #1F3274; ");
-                    highlightTheLabel('o');
+                targetedBtn.setStyle("-fx-text-fill: #febd08;-fx-background-color: #1F3274; ");
+                highlightTheLabel('o');
+                numberOfClickedBoxes++;
+                reviewTheBoard();
+                if (!isBoardFull() && !notifiyWining() && !isBoardEmpty()) {
+                    aiBtn = mediumMode();
+                    aiBtn.setText(ai);
+                    aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
+                    highlightTheLabel('x');
                     numberOfClickedBoxes++;
                     reviewTheBoard();
-                         if(!isBoardFull()&&!notifiyWining() && !isBoardEmpty()){
-                        aiBtn = mediumMode();
-                        aiBtn.setText(ai);
-                        aiBtn.setStyle("-fx-text-fill: #ff4948;-fx-background-color: #1F3274; ");
-                        highlightTheLabel('x');
-                         numberOfClickedBoxes++;
-                            reviewTheBoard();
-                         }
-                }  
+                }
             }
         }
-     public void getLoginName(String loggedUserName)
-     {
-         this.loggedUserName= loggedUserName;
-     }
-     
     }
+
+    public void getLoginName(String loggedUserName) {
+        this.loggedUserName = loggedUserName;
+    }
+
+}

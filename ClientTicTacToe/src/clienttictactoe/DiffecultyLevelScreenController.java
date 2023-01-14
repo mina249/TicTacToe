@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clienttictactoe;
 
 import java.io.IOException;
@@ -21,11 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author ITi
- */
 public class DiffecultyLevelScreenController implements Initializable {
 
     @FXML
@@ -39,23 +29,20 @@ public class DiffecultyLevelScreenController implements Initializable {
     @FXML
     private ToggleButton recordBtn;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void handleEasyBtnAction(ActionEvent event) {
         try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
-            Parent root= loader.load();
-            BoardScrController board_scr_controller= loader.getController();
-            board_scr_controller.intializeLabels("EASY DIFFICULTY","","");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Board scr.fxml"));
+            Parent root = loader.load();
+            BoardScrController board_scr_controller = loader.getController();
+            board_scr_controller.intializeLabels("EASY DIFFICULTY", "", "");
             Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -65,13 +52,13 @@ public class DiffecultyLevelScreenController implements Initializable {
 
     @FXML
     private void handleMediumBtnAction(ActionEvent event) {
-           try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
-            Parent root= loader.load();
-            BoardScrController board_scr_controller= loader.getController();
-            board_scr_controller.intializeLabels("MEDIUM DIFFICULTY","","");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Board scr.fxml"));
+            Parent root = loader.load();
+            BoardScrController board_scr_controller = loader.getController();
+            board_scr_controller.intializeLabels("MEDIUM DIFFICULTY", "", "");
             Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -81,13 +68,13 @@ public class DiffecultyLevelScreenController implements Initializable {
 
     @FXML
     private void handleHardBtnAction(ActionEvent event) {
-         try {
-           FXMLLoader loader= new FXMLLoader(getClass().getResource("Board scr.fxml"));
-            Parent root= loader.load();
-            BoardScrController board_scr_controller= loader.getController();
-            board_scr_controller.intializeLabels("HARD DIFFICULTY","","");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Board scr.fxml"));
+            Parent root = loader.load();
+            BoardScrController board_scr_controller = loader.getController();
+            board_scr_controller.intializeLabels("HARD DIFFICULTY", "", "");
             Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -97,10 +84,10 @@ public class DiffecultyLevelScreenController implements Initializable {
 
     @FXML
     private void handleBackBtnAction(ActionEvent event) {
-         try {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("HomePageScreen.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -111,5 +98,5 @@ public class DiffecultyLevelScreenController implements Initializable {
     @FXML
     private void handleRecordBtnAction(ActionEvent event) {
     }
-    
+
 }
