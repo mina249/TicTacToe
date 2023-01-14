@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,7 +26,7 @@ public class Database {
     public static ObservableList<Player> serverPlayerList() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ObservableList<Player> players = FXCollections.observableArrayList();
         Statement stmt = con.createStatement();
-        String queryString = "select * from Player where status not in ('Offline', 'offline') order by status desc";
+        String queryString = "select * from Player order by status desc";
         ResultSet rs = stmt.executeQuery(queryString);
         while (rs.next()) {
            String name = rs.getString(1);
@@ -38,6 +40,17 @@ public class Database {
         return players;
     }
     
+    public static void setOffline()
+    {
+        try {
+            Statement stmt = con.createStatement();
+            String queryStrings = "update PLAYER set status = 'offline'";
+            stmt.executeUpdate(queryStrings);
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  
     public static String readyingStringforOnlineList() throws SQLException {
         Statement stmt = con.createStatement();
         String onlinePlayers = "onlinePlayers;";

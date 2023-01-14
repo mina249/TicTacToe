@@ -21,6 +21,7 @@ public class ClientSide {
     PrintStream ps;
     static Socket socket;
     Thread thread;
+
         
     public ClientSide(){
          
@@ -29,10 +30,9 @@ public class ClientSide {
         } catch (IOException ex) {
             Logger.getLogger(ClientSide.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
+
         thread = new Thread(()->{
         try {
-           
             dis = new DataInputStream(socket.getInputStream ());
             ps = new PrintStream(socket.getOutputStream ());
         } catch (IOException ex) {

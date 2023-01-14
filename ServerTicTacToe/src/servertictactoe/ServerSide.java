@@ -45,12 +45,45 @@ public class ServerSide {
             thread.start();
         } catch (IOException ex) {
             Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
+        }    
        }
-    public static void main(String [] args){
-         
+
+    /*
+    boolean isOpen;
+    public void openSocket()
+    {
+        try {
+            serverSocket = new ServerSocket(9050);
+            thread = new Thread(() -> {
+             isOpen = true;
+                while(true){
+                    try {
+                        if(isOpen == false)
+                        {
+                            break;
+                        }
+                        Socket clientSocket = serverSocket.accept();
+                        new PlayerHandler(clientSocket);
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            thread.start();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
-            
-  
-} 
+    
+    public void closeSocket()
+    {
+        try {
+            isOpen = false;
+            serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerSide.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    */
+}  

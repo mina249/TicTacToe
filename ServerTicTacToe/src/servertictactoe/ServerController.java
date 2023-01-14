@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.shape.Circle;
 import static servertictactoe.Database.dbConnect;
 import static servertictactoe.Database.serverPlayerList;
+import static servertictactoe.Database.setOffline;
 
 
 public class ServerController implements Initializable {
@@ -34,14 +35,13 @@ public class ServerController implements Initializable {
     private TableColumn<Player, Integer> tableColumnNumGames;
     @FXML
     private Circle circleGreen;
+    ObservableList playersList;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-            ObservableList playersList;
         try {
             dbConnect();
             playersList = serverPlayerList();
@@ -53,7 +53,8 @@ public class ServerController implements Initializable {
             tableColumnScore.setCellValueFactory(new PropertyValueFactory<>("totalScore"));
             tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
             tableColumnNumGames.setCellValueFactory(new PropertyValueFactory<>("numPlayedGames"));
-               new ServerSide();
+            new ServerSide();
+            //serverSide.openSocket();
     }
     
     public void serverOnOff()
@@ -62,22 +63,29 @@ public class ServerController implements Initializable {
         {
             serverOnOffButton.setText("Server Off");
             circleGreen.setVisible(false);
+            setOffline();           
+            //serverSide.closeSocket();
         }
         else
-        {
+        {          
             serverOnOffButton.setText("Server On");
             circleGreen.setVisible(true);
-            //ServerSide serverSide = new ServerSide();
-
-/*           
-         Platform.runLater(() -> {
-                try {
-                    serverPlayerList();
-                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-                    Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
-                }      
-            });
-*/            
+            //serverSide.openSocket();
         }
+        onRefresh();
+    }
+
+    public void onRefresh()
+    {
+        Platform.runLater( () -> {
+        try {
+            ObservableList players = Database.serverPlayerList();
+            tableView.setItems(players);
+            tableColumnName.setCellValueFactory(new PropertyValueFactory<Player, String>("name"));
+            tableColumnStatus.setCellValueFactory(new PropertyValueFactory<Player, String>("status"));
+            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 }

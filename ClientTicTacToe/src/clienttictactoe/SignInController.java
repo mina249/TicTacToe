@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clienttictactoe;
 
 import java.io.DataInputStream;
@@ -61,7 +56,7 @@ public class SignInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cs = new ClientSide();
+          cs = new ClientSide();
 
     }
 
@@ -85,7 +80,7 @@ public class SignInController implements Initializable {
 
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
-
+          
         if (tf_UserName.getText().isEmpty() || tx_pass.getText().isEmpty()) {
             error_label.setText("Please fill the empty fields");
         } else {
